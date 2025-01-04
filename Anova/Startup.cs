@@ -66,6 +66,8 @@ namespace Anova
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddAuthentication().AddFacebook(Options =>
             {
+                Options.AppId = "2326152687555159";
+                Options.AppSecret = "0eb50ddff5abf24d41ad479c23d1543d";
             });
 
             services.AddControllersWithViews();
