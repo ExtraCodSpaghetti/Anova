@@ -14,40 +14,37 @@ window.onscroll = function () {
 }
 
 //navbar navigation
-   
-    $(document).ready(function () {
-        $(".navbar-toggler").click(function () {
-            if ($("#navbarSupportedContent").hasClass("show")) {
-                $("#navbarSupportedContent").removeClass("show");
-            } else {
-                $("#navbarSupportedContent").addClass("show");
-            }
-        });
+
+$(document).ready(function () {
+    $(".navbar-toggler").click(function () {
+        if ($("#navbarSupportedContent").hasClass("show")) {
+            $("#navbarSupportedContent").removeClass("show");
+        } else {
+            $("#navbarSupportedContent").addClass("show");
+        }
     });
-
-
-
+});
 
 // footer
-function stickyFooter() {
-    var footer = document.querySelector("footer");
-    var footerHeight = footer.offsetHeight;
-    var windowHeight = window.innerHeight;
-    var bodyHeight = document.body.offsetHeight;
+//function stickyFooter() {
+//    var footer = document.querySelector("footer");
+//    var footerHeight = footer.offsetHeight;
+//    var windowHeight = window.innerHeight;
+//    var bodyHeight = document.body.offsetHeight;
 
-    if (bodyHeight < windowHeight) {
-        footer.style.position = "fixed";
-        footer.style.bottom = "0";
-        footer.style.width = "100%";
-    } else {
-        footer.style.position = "static";
-    }
-}
+//    if (bodyHeight < windowHeight) {
+//        footer.style.position = "fixed";
+//        footer.style.bottom = "0";
+//        footer.style.width = "100%";
+//    } else {
+//        footer.style.position = "static";
+//    }
+//}
 
-window.addEventListener('load', function () {
-    stickyFooter();
-});
+//window.addEventListener('load', function () {
+//    stickyFooter();
+//});
 
-window.addEventListener('resize', function () {
-    stickyFooter();
-});
+//window.addEventListener('resize', function () {
+//    stickyFooter();
+//});

@@ -3,7 +3,6 @@ for details on configuring this project to bundle and minify static web assets. 
 
 @import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
 
-
 /* Toastr */
 .toast-success {
     background-color: #13d878 !important;
@@ -25,47 +24,48 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
-
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
@@ -75,13 +75,25 @@ html {
     position: relative;
     min-height: 100%;
 }
-
-
-
-    .footer {
-    height: 56px; 
+.main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
+.footer {
+    margin-top: auto; /* Это заставляет футер "отталкиваться" к низу */
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+}
+
+/*    .footer {
+    height: 56px;
+}*/
 
 .port-image {
     width: 100%;
@@ -139,9 +151,7 @@ html {
 header {
     transition: all .4s ease;
     background-color: #e6e6e6;
-   
 }
-
 
     header.sticky {
         position: fixed;
@@ -152,7 +162,6 @@ header {
         transform: translateY(140px);
         background-color: #e6e6e6 !important;
     }
-
 
 #logreg-forms {
     width: 412px;
@@ -216,7 +225,6 @@ header {
     border: 1px solid red;
 }
 
-
 #logreg-forms button[type="submit"] {
     margin-top: 10px;
 }
@@ -225,7 +233,6 @@ header {
     background-color: #3C589C;
     color: white;
 }
-
 
 #logreg-forms .form-reset, #logreg-forms .form-signup {
     display: none;
@@ -244,7 +251,6 @@ header {
     margin: 0 auto;
 }
 
-
 #home {
     width: 100%;
     min-height: 35vh;
@@ -262,19 +268,17 @@ header {
 
 .home-text h1 {
     font-size: 3.4rem;
-      color:;
+    color:;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: grid;
 }
 
-.home-text p{
+.home-text p {
     font-size: 1rem;
     color:;
     margin: 0.5rem 0 1.4rem;
 }
-
-
 
 .descrInCard {
     display: flex;
@@ -285,7 +289,6 @@ header {
 label.nameInCard {
     margin-bottom: 0rem;
 }
-
 
 /*fonts*/
 
@@ -319,18 +322,19 @@ label.nameInCard {
 a {
     text-decoration: none !important;
 }
+
 .nameInCard {
     font-weight: 600;
     font-size: 18px;
     line-height: 120%;
     color: #3a3a3a;
 }
+
 .priceInCard {
     font-weight: 600;
     font-size: 16px;
     line-height: 150%;
     color: #3a3a3a;
-    
 }
 
 .productCard:hover {
@@ -339,6 +343,9 @@ a {
 
 .productCard {
     --bs-border-width: 0;
-    border-bottom: 2px solid #ebebeb!important;
+    border-bottom: 2px solid #ebebeb !important;
 }
 
+footer{
+    margin-top: auto;
+}

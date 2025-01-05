@@ -1,9 +1,9 @@
 ﻿@using Anova_Utility;
 
 @model Anova_Models.Product
-    
 
-    <div class="col-lg-3 col-md-4 pb-4 filter @Model.Category.CategoryName.Replace(' ','_')">
+
+<div class="col-lg-3 col-md-4 pb-4 filter @Model.Category.CategoryName.Replace(' ','_') @Model.ApplicationType.Name.Replace(' ','_')">
 
         <!-- Card-->
     <a class="productCard card rounded " asp-action="Details" asp-route-id="@Model.Id">

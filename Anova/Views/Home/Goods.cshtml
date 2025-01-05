@@ -1,0 +1,81 @@
+﻿
+@model Anova_Models.ViewModels.HomeVM
+
+
+<div class="container">
+    <div class="text-center categories poppins-medium">
+        <button class="btn btn-dark filter-button" data-filter="all">Clear</button>
+        @foreach (var obj in Model.Categories)
+        {
+            <button class="btn btn-outline-secondary filter-button" data-filter="@obj.CategoryName.Replace(' ','_')">
+                @obj.CategoryName
+            </button>
+        }
+    </div>
+    <div class="text-center categories poppins-medium">
+        
+        @foreach (var obj in Model.ApplicationType)
+        {
+            <button class="btn btn-outline-secondary filter-button" data-filter="@obj.Name.Replace(' ','_')">
+                @obj.Name
+            </button>
+        }
+    </div>
+    <br />
+    <div class="row">
+        @foreach (var prod in Model.Products)
+        {
+            <partial name="_IndividualProductCard" model="prod" class="filter" />
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var selectedFilters = [];
+
+            // При клике на фильтр
+            $(".filter-button").click(function () {
+                var value = $(this).attr('data-filter');
+                var button = $(this);
+
+                // Если выбран фильтр "All", сбрасываем все выбранные фильтры
+                if (value == "all") {
+                    selectedFilters = [];
+                    $(".filter-button").removeClass('active'); // Убираем активный класс со всех кнопок
+                    $('.filter').show('1000');
+                    return;
+                }
+
+                // Переключаем активный класс для кнопки
+                button.toggleClass('active');
+
+                // Если фильтр уже выбран, удаляем его
+                if (selectedFilters.includes(value)) {
+                    selectedFilters = selectedFilters.filter(item => item !== value);
+                } else {
+                    // Если фильтр не выбран, добавляем его
+                    selectedFilters.push(value);
+                }
+
+                // Применяем фильтрацию
+                if (selectedFilters.length > 0) {
+                    $('.filter').each(function () {
+                        var elementClasses = $(this).attr('class').split(' ');
+                        var isVisible = selectedFilters.every(function (filter) {
+                            return elementClasses.includes(filter);
+                        });
+                        if (isVisible) {
+                            $(this).show('3000');
+                        } else {
+                            $(this).hide('3000');
+                        }
+                    });
+                } else {
+                    $('.filter').show('1000');
+                }
+            });
+        });
+    </script>
+}

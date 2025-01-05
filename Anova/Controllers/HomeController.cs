@@ -21,13 +21,15 @@ namespace Anova.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IProductRepository _prodRepo;
         private readonly ICategoryRepository _catRepo;
+        private readonly IApplicationTypeRepository _applRepo;
 
         public HomeController(ILogger<HomeController> logger, IProductRepository prodRepo,
-            ICategoryRepository catRepo)
+            ICategoryRepository catRepo, IApplicationTypeRepository applRepo)
         {
             _logger = logger;
             _catRepo = catRepo;
             _prodRepo = prodRepo;
+            _applRepo = applRepo;
         }
 
         public IActionResult Index()
@@ -35,7 +37,8 @@ namespace Anova.Controllers
             HomeVM HomeVm = new HomeVM()
             {
                 Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType"),
-                Categories = _catRepo.GetAll()
+                Categories = _catRepo.GetAll(),
+                ApplicationType = _applRepo.GetAll()
             };
             return View(HomeVm);
         }
@@ -78,7 +81,7 @@ namespace Anova.Controllers
             shoppingCartList.Add(new ShoppingCart { ProductId = id, Amounts = detailsVM.Product.TempAmounts });
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
             TempData[WC.Success] = "Action completed successfully";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Goods));
         }
 
         public IActionResult RemoveFromCart(int id)
@@ -98,12 +101,23 @@ namespace Anova.Controllers
 
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
             TempData[WC.Success] = "Action completed successfully";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Goods));
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Goods()
+        {
+            HomeVM HomeVm = new HomeVM()
+            {
+                Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType"),
+                Categories = _catRepo.GetAll(),
+                ApplicationType = _applRepo.GetAll()
+            };
+            return View(HomeVm);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
