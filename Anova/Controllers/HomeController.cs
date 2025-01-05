@@ -34,9 +34,15 @@ namespace Anova.Controllers
 
         public IActionResult Index()
         {
+            // Получаем все продукты
+            var allProducts = _prodRepo.GetAll(includeProperties: "Category,ApplicationType");
+
+            // Выбираем случайные 4 продукта
+            var randomProducts = allProducts.OrderBy(p => Guid.NewGuid()).Take(4).ToList();
+
             HomeVM HomeVm = new HomeVM()
             {
-                Products = _prodRepo.GetAll(includeProperties: "Category,ApplicationType"),
+                Products = randomProducts,
                 Categories = _catRepo.GetAll(),
                 ApplicationType = _applRepo.GetAll()
             };

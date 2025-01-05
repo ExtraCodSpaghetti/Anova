@@ -306,19 +306,35 @@ label.nameInCard {
     line-height: 150%;
     color: #898989;
 }
+p, a, form, input, td {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 150%;
+}
 
-.poppins-semibold {
+    .poppins-semibold {
+        font-family: "Poppins", serif;
+        font-weight: 600;
+        font-style: normal;
+    }
+div {
     font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
 }
 
-.poppins-bold {
+ .poppins-bold {
     font-family: "Poppins", serif;
     font-weight: 700;
     font-style: normal;
 }
-
+h1, h2 {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+}
 a {
     text-decoration: none !important;
 }
@@ -348,4 +364,17 @@ a {
 
 footer{
     margin-top: auto;
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh; /* Занимает всю высоту окна */
+    position: relative;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #343a40;
+    color: white;
+}
+
+.main-content {
+    background-color: #f8f9fa;
 }

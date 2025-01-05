@@ -35,7 +35,7 @@
 
    
     <header >
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom  mb-3" style="background-color: #e6e6e6 !important;" >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom" style="background-color: #e6e6e6 !important;" >
             <div class="container"> 
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/images/tile.png" width="40%" />
@@ -56,31 +56,8 @@
                         </li>*@
                         @if (User.IsInRole(WC.AdminRole))
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Settings
-                                </a>
-                                <ul class="dropdown-menu">
-
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                                    </li>
-                                    <li><a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a></li>
-                                    <li> <a class="nav-link text-dark" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a></li>
-
-                                    <li><a class="dropdown-item nav-link" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Management
-                                </a>
-                                <ul class="dropdown-menu">
-                                     <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inquiry" asp-action="Index">Inquiry</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Admin Area</a>
                             </li>
                         }
                         <li>

@@ -1,5 +1,41 @@
 ﻿@model Anova_Models.ViewModels.OrderListVM
 
+<div class="d-flex" style="min-height: 100vh;">
+    <!-- Sidebar -->
+    <aside class="sidebar bs-tertiary-color text-white p-3" style="min-width: 250px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="poppins-semibold">Admin Area</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+            </li>
+            <li>
+                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+            </li>
+            <li>
+                <a class="nav-link text-dark text-white" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
+            </li>
+
+            <li>
+                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
+            </li>
+            <li>
+                <a class="dropdown-item nav-link text-info" href="https://sandbox.braintreegateway.com/merchants/sqs9cf9v2p79bk6z/transactions/advanced_search" target="_blank">
+                    Transactions
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <li>
+            <a class="dropdown-item nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a>
+        </li>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-grow-1">
+
 <form method="get">
     <div class="container p-4 my-3">
         <h2 class="text-info">Orders Management</h2>
@@ -37,7 +73,7 @@
     <div class="bg-white p-3">
         <ejs-grid id="Grid" dataSource="@Model.OrderHList" allowFiltering="true" allowSorting="true" allowPaging="true">
             <e-grid-filtersettings type="Menu"></e-grid-filtersettings>
-            <e-grid-pagesettings pageSize="5"></e-grid-pagesettings>
+            <e-grid-pagesettings pageSize="8"></e-grid-pagesettings>
             <e-grid-columns>
                 <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" textAlign="Right" width="100"></e-grid-column>
                 <e-grid-column field="FullName" headerText="Name" textAlign="Right"></e-grid-column>
@@ -52,4 +88,7 @@
                 </e-grid-column>
             </e-grid-columns>
         </ejs-grid>
+    </div>
+    </div>
+
     </div>
