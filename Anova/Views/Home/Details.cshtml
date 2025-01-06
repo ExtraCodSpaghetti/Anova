@@ -25,8 +25,8 @@
                                     </div>
 
                                     <div class="col-10">
-                                        <span class="text-dark badge p-3 border">@Model.Product.Category.CategoryName</span>
-                                        <span class="text-dark badge p-3 border">@Model.Product.ApplicationType.Name</span>
+                                        <span class="text-dark badge p-2 border">@Model.Product.Category.CategoryName</span>
+                                        <span class="text-dark badge p-2 border">@Model.Product.ApplicationType.Name</span>
                                         <h3 class="text-success"></h3>
                                         <p class="text-secondary">@Html.Raw(Model.Product.ShortDesc) </p>
                                        
@@ -48,18 +48,18 @@
                                             <span asp-validation-for="@Model.Product.TempAmounts" class="text-danger"></span>
                                         </div>
                                     <div class="col-12 col-md-4 pb-1 ">
-                                        <a asp-action="Goods" class="btn btn-outline-dark btn-square form-control btn-lg" style="height:50px;">Back to List</a>
+                                        <button asp-action="Goods" class="btn btn-outline-dark btn-square form-control btn-sm" style="height:38px;">Back to List</button>
                                     </div>
                                     <div class="col-12 col-md-4 ">
                                         @if (Model.ExistInCart)
                                         {
-                                            <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-outline-warning btn-square form-control btn-lg" style="height:50px;">Remove from Cart</a>
+                                            <button asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-outline-warning btn-square form-control btn-sm" style="height:38px;">Remove from Cart</button>
                                         }
                                         else
                                         {
 
 
-                                            <button type="submit" asp-route-id="@Model.Product.Id" class="btn btn-outline-dark form-control btn-lg" style="height:50px;">Add to Cart</button>
+                                            <button type="submit" asp-route-id="@Model.Product.Id" class="btn btn-outline-dark form-control btn-sm" style="height:38px;">Add to Cart</button>
                                         }
                                     </div>
                                     

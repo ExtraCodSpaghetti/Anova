@@ -3,15 +3,169 @@
 
 @*<div class="container-fluid my-fon"><img src="~/images/fon.jpg" class="img-fluid" alt=""></div>*@
 
-<div class="container-fluid home" id="home">
-    
 
-        <div class="container home-text">
-            <h1 align="right">Tira mi su</h1>
-             <p></p>
+
+
+    <div class="hero container-fluid shadow-lg">
+        <div class="hero-cube">
+        <div class="hero-container" style="margin:auto;">
+        <h1 class="hero-text">
+            Discover Our
+            New Collection
+        </h1>
+            <form asp-controller="Home" asp-action="Goods" method="get">
+                <button class="button-class text-dark" type="submit">BUY NOW</button>
+            </form>
         </div>
-</div>
+        </div>
+    </div>
+    
+    <section class="section-Type">
+        <div class="container">
+    <h2>Browse The Range</h2>
+        <span class="pb-3">You can choose the right retro furniture for your interior or purpose</span>
+    <div class="container justify-content-center row row-cols-1 row-cols-md-3 g-4 mt-3">
+        <div class="col">
+                <a asp-controller="Home" asp-action="Goods" method="get" class="card-link">
+            <div class="card application-category">
+                    <img src="@Url.Content("~/images/Living.jpg")" class="card-img-top img-fluid d-block mx-auto" alt="..." style="border-radius:10px;">
+                <div class="card-body">
+                            <h5 class="card-title">Living</h5>
+                </div>
+            </div>                   
+                </a>
+        </div>
+        <div class="col">
+                <a asp-controller="Home" asp-action="Goods" method="get" class="card-link">
+                <div class="card application-category">
+                        <img src="@Url.Content("~/images/Dining.jpg")" class="card-img-top img-fluid d-block mx-auto" alt="..." style="border-radius:10px;">
+                <div class="card-body">
+                            <h5 class="card-title">Dining</h5>
+                     </div>
+            </div>
+            </a>
+        </div>
+        <div class="col">
+                <a asp-controller="Home" asp-action="Goods" method="get" class="card-link">
+                <div class="card application-category">
+                        <img src="@Url.Content("~/images/Bedroom.jpg")" class="card-img-top img-fluid d-block mx-auto" alt="..." style="border-radius:10px;">
+                <div class="card-body">
+                            <h5 class="card-title">Bedroom</h5>
+                    
+                </div>
+            </div>
+                </a>
+        </div>
+    </div>
+    </div>
+    </section>
 
+<section>
+    <div class="container" style="text-align:center;">
+    <h2>Mission & Visione</h2>
+    <span class="pb-3"></span>
+    </div>
+
+    <div data-aos="fade-left" class="container d-flex align-items-center justify-content-center pt-5 ">
+        <div class="card w-100 mb-3 border-0">
+            <div class="row g-0">
+                <div class="col-12">
+                    <div class="card-body">
+                        <img src="@Url.Content("~/images/Mission.jpg")" class="img-fluid rounded-start obtekaemoe-img2" alt="..." style="border-radius: 25px !important;">
+                        <span class="card-title pb-2 text-center">Mission</span>
+                        <div class="opis">
+                            <p class="text-body-secondary pt-2 ">
+                                We strive to become the leading experts in restored rare furniture, combining the traditions of the past with modern craftsmanship. Our principles are quality, honesty and a love for unique pieces that carry a story.
+                                We create comfort and inspiration for every home by focusing on customer needs and supporting the development of local craftsmanship.
+                            </p>
+                            <p class="text-body-secondary pt-2 ">
+                                At our restored rare furniture store, we strive to inspire customers to create unique interiors with history. We are dedicated to bringing life back to classic pieces, combining authentic craftsmanship with modern restoration techniques.
+
+                            </p>
+                            <p class="text-body-secondary pt-2 ">
+                                
+                                Through a personalized approach, expert advice and high quality work, we build strong, trusting relationships with our customers.
+                                Our mission is to become a trusted partner in creating a cozy and unique space where every detail tells its own story.
+                            </p>
+                               </div>
+                        
+                    </div>
+                </div>
+                
+                    
+                
+            </div>
+        </div>
+    </div>
+
+    <div data-aos="fade-right" class="container d-flex align-items-center justify-content-center pt-5 ">
+        <div class="card w-100 mb-3 border-0">
+            <div class="row g-0">
+                <div class="col-12">
+                    <div class="card-body">
+                        <img src="@Url.Content("~/images/Visione.jpg")" class="img-fluid rounded-start obtekaemoe-img" alt="..." style="border-radius: 25px !important;">
+                        <span class="card-title pb-2 text-center">Visione</span>
+                        <div class="opis">
+                            <p class="text-body-secondary pt-2">
+                                The vision of our store is to breathe new life into the timeless art of creating unique furniture by blending traditional craftsmanship with innovative restoration techniques. We are devoted to preserving cultural heritage, protecting the environment, and giving new purpose to forgotten or neglected pieces.
+                            </p>
+                            @* <p class="text-body-secondary pt-2">
+                                Our goal is to turn each item into something more than just furniture — it becomes a functional work of art, carrying its history while seamlessly fitting into modern interiors.
+                            </p> *@
+                            <p class="text-body-secondary pt-2">
+                                We see a future where conscious consumption shapes the way we furnish our homes, and beautifully restored furniture becomes a symbol of sustainable living. By carefully selecting materials and using eco-friendly processes, we aim to reduce waste and inspire a greater appreciation for timeless design.
+                            </p>
+                            <p class="text-body-secondary pt-2">
+                                Through collaboration with skilled artisans and a dedication to quality, we strive to be a trusted partner for our customers, helping them create cozy, stylish, and eco-conscious homes where each piece tells a unique story.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="instagram-section shadow">
+    <div class="container text-center pb-3">
+        <h2 class="section-title">Team</h2>
+        <p class="section-description">With love for every detail and respect for the history of objects, we create true works of art that find a second life in modern interiors.</p>
+    </div>
+
+    <div class="single-image">
+        <img src="@Url.Content("~/images/people8.JPG")" alt="Team" style="border-radius:10px;">
+    </div>
+
+    <!-- Галерея изображений (отображается только на планшетах и выше) -->
+    <div class="image-gallery">
+        <div class="image-item square">
+            <img src="@Url.Content("~/images/people1.JPG")" alt="Fashion 1" style="border-radius:10px;">
+        </div>
+        <div class="image-item rectangle" style="border-radius:10px;">
+            <img src="@Url.Content("~/images/people2.JPG")" alt="Fashion 2" style="border-radius:10px;">
+        </div>
+        <div class="image-item square">
+            <img src="@Url.Content("~/images/people6.JPG")" alt="Fashion 5" style="border-radius:10px;">
+        </div>
+        <div class="image-item rectangle" style="border-radius:10px;">
+            <img src="@Url.Content("~/images/people4.JPG")" alt="Fashion 4" style="border-radius:10px;">
+        </div>
+
+        <div class="image-item square" style="border-radius:10px;">
+            <img src="@Url.Content("~/images/people3.JPG")" alt="Fashion 3" style="border-radius:10px;">
+        </div>
+        <div class="image-item rectangle" style="border-radius:10px;">
+            <img src="@Url.Content("~/images/people5.JPG")" alt="Fashion 6" style="border-radius:10px;">
+        </div>
+        <div class="image-item square">
+            <img src="@Url.Content("~/images/people7.JPG")" alt="Fashion 6" style="border-radius:10px;">
+        </div>
+    </div>
+</section>
+
+<section class="section-Our-Products">
+    <h2>Our Products</h2>
+ 
 <div class="container">
     <br />
     <div class="row">
@@ -22,5 +176,13 @@
             
         }
     </div>
+    <form asp-controller="Home" asp-action="Goods" method="get">
+        <button class="button-class text-dark" type="submit">See more</button>
+    </form>
 </div>
+    </section>
+
+
+
+
 

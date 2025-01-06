@@ -6,8 +6,8 @@
 <div class="col-lg-3 col-md-4 pb-4 filter @Model.Category.CategoryName.Replace(' ','_') @Model.ApplicationType.Name.Replace(' ','_')">
 
         <!-- Card-->
-    <a class="productCard card rounded " asp-action="Details" asp-route-id="@Model.Id">
-            <img class="card-img-top img-fluid d-block mx-auto mb-3" src="@WC.ImagePath@Model.Image" alt="Card image cap">
+    <a class="productCard card rounded" asp-action="Details" asp-route-id="@Model.Id">
+        <img class="card-img-top img-fluid d-block mx-auto mb-3" src="@WC.ImagePath@Model.Image" alt="Card image cap" style="border-radius:10px;" >
             <div class="bodyCard px-3 pb-1 row">
             <div class="col-12"><label class="nameInCard poppins-semibold">@Model.Name</label></div>
             <div class="card-body p-1 px-3 row">
@@ -21,5 +21,5 @@
             </div>
             <div class="col-3"><label class="priceInCard poppins-semibold"><span class="h5">$@Model.Price</span></label> </div>
             </div>
-        </a>
-    </div>
+    </a>
+</div>

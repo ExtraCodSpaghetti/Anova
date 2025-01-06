@@ -114,6 +114,14 @@ namespace Anova.Controllers
         {
             return View();
         }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Returns()
+        {
+            return View();
+        }
 
         public IActionResult Goods()
         {

@@ -1,39 +1,83 @@
-﻿@model Anova_Models.ViewModels.HomeVM
-
-<div class="container">
-    <div class="text-center categories" style="font-family: 'Alkatra', cursive;  position: center;">
-        <button class="btn btn-dark filter-button" data-filter="all">All</button>
-        @foreach (var obj in Model.Categories)
-        {
-            <button class="btn btn-outline-secondary filter-button" data-filter="@obj.CategoryName.Replace(' ','_')">
-                @*~/images/fon.jpg*@
-                @obj.CategoryName
-            </button>
-        }
-    </div>
-    <br />
-    <div class="row">
-        @foreach (var prod in Model.Products)
-        {
-            <partial name="_IndividualProductCard" model="prod" />
-            //display all product
-        }
-    </div>
+﻿<div class="container text-center p-5">
+    <h2>Polityka prywatności strony internetowej (ANOVA.FURNITURE.PL)</h2>
 </div>
+<div class="container">
+<h2>Administrator danych osobowych</h2>
+<p>Administratorem danych osobowych jest Pan Kostiantyn Chesak, zamieszkały przy: Piękna 25B/54, 50-506 Wrocław (zwany dalej: „Właściciel”).</p>
+<p>Inspektorem ochrony danych jest Pan Kostiantyn Chesak, adres e-mail: K03.chesak@gmail.com (zwany dalej: „IOD”).</p>
 
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-            $(".filter-button").click(function () {
-                var value = $(this).attr('data-filter');
-                if (value == "all") {
-                    $('.filter').show('1000');
-                }
-                else {
-                    $(".filter").not('.' + value).hide('3000');
-                    $('.filter').filter('.' + value).show('3000');
-                }
-            });
-        });
-    </script>
-}
+<h2>II. Cel przetwarzania danych osobowych</h2>
+<p>Administrator przetwarza dane osobowe Użytkownika w celu:</p>
+<ul>
+    <li>zapewnienia prawidłowego funkcjonowania usług, takich jak logowanie, rejestracja oraz realizacja zamówień;</li>
+    <li>umożliwienia kontaktu z Użytkownikiem;</li>
+    <li>realizacji dostawy zamówionych produktów;</li>
+    <li>celów księgowych i archiwizacyjnych.</li>
+</ul>
+<p>Przetwarzanie danych osobowych jest niezbędne w szczególności do:</p>
+<ul>
+    <li>zarejestrowania się na stronie internetowej;</li>
+    <li>zawarcia umowy;</li>
+    <li>dokonania rozliczeń;</li>
+    <li>dostarczenia zamówionych przez Użytkownika towarów lub świadczenia usług;</li>
+    <li>korzystania przez Użytkownika z wszelkich uprawnień konsumenckich (np. odstąpienia od umowy, reklamacji).</li>
+</ul>
+<p>Użytkownik może również wyrazić zgodę na otrzymywanie informacji o nowościach i promocjach. W takim przypadku dane osobowe Użytkownika będą przetwarzane również w celu przesyłania informacji handlowych dotyczących nowych produktów, usług, promocji czy wyprzedaży.</p>
+
+<h2>III. Rodzaj danych osobowych</h2>
+<ol>
+    <li>
+        Przy każdym wejściu na stronę internetową automatycznie pobierane są dane techniczne, takie jak:
+        <ul>
+            <li>rodzaj i wersja używanej przeglądarki;</li>
+            <li>system operacyjny Użytkownika;</li>
+            <li>dostawca usług internetowych Użytkownika;</li>
+            <li>adres IP Użytkownika;</li>
+            <li>data i godzina wejścia na stronę internetową;</li>
+            <li>strony internetowe, z których Użytkownik wszedł na naszą stronę.</li>
+        </ul>
+    </li>
+    <li>
+        Administrator przetwarza następujące dane osobowe Użytkownika, niezbędne do:
+        <ul>
+            <li><strong>Rejestracji na stronie internetowej:</strong> imię i nazwisko, adres e-mail.</li>
+            <li><strong>Dokonywania zakupów:</strong> imię i nazwisko, płeć, adres dostawy, numer telefonu, adres e-mail.</li>
+            <li><strong>Zwrotów i reklamacji:</strong> numer rachunku bankowego (w przypadku zwrotu należności).</li>
+            <li><strong>Opcjonalnych danych podawanych przez Użytkownika:</strong> data urodzenia, numer PESEL (w przypadku wystawienia faktury), numer NIP (w przypadku wystawienia faktury dla przedsiębiorcy).</li>
+        </ul>
+    </li>
+</ol>
+
+<h2>IV. Okres przechowywania danych</h2>
+<p>Dane osobowe Użytkowników są przechowywane przez okres niezbędny do realizacji celów przetwarzania, w tym:</p>
+<ul>
+    <li>przez czas świadczenia usług oraz realizacji zamówień;</li>
+    <li>przez okres wymagany przepisami prawa (np. podatkowego);</li>
+    <li>do czasu wycofania zgody przez Użytkownika (w przypadku przetwarzania danych na podstawie zgody).</li>
+</ul>
+
+<h2>V. Prawa przysługujące Użytkownikowi</h2>
+<p>Użytkownikowi przysługuje prawo do:</p>
+<ul>
+    <li>dostępu do swoich danych osobowych;</li>
+    <li>sprostowania swoich danych osobowych;</li>
+    <li>usunięcia danych osobowych („prawo do bycia zapomnianym”);</li>
+    <li>ograniczenia przetwarzania danych;</li>
+    <li>przenoszenia danych do innego administratora;</li>
+    <li>wniesienia sprzeciwu wobec przetwarzania danych osobowych;</li>
+    <li>cofnięcia zgody na przetwarzanie danych w dowolnym momencie bez wpływu na zgodność z prawem przetwarzania dokonanego przed jej cofnięciem.</li>
+</ul>
+<p>Użytkownik ma również prawo złożyć skargę do organu nadzorczego (<strong>Urzęd Ochrony Danych Osobowych</strong>, UODO) w przypadku uznania, że przetwarzanie danych narusza przepisy RODO.</p>
+
+<h2>VI. Powierzenie przetwarzania danych innym podmiotom</h2>
+<p>Administrator może powierzać przetwarzanie danych osobowych podmiotom współpracującym, takim jak firmy kurierskie czy operatorzy płatności, wyłącznie w zakresie niezbędnym do realizacji transakcji. Podmioty te przetwarzają dane na podstawie umów zawartych z administratorem i wyłącznie zgodnie z jego poleceniami.</p>
+<p>Dane osobowe Użytkowników nie są przekazywane poza obszar Unii Europejskiej.</p>
+
+<h2>VII. Pliki cookies</h2>
+<p>Strona internetowa używa plików cookies w celu zapewnienia prawidłowego działania, optymalizacji korzystania ze strony oraz dostosowania treści do preferencji Użytkownika. Użytkownik może zarządzać ustawieniami plików cookies za pomocą ustawień przeglądarki internetowej.</p>
+
+<h2>VIII. Zmiany polityki prywatności</h2>
+<p>Administrator zastrzega sobie prawo do wprowadzania zmian w niniejszej Polityce Prywatności. O wszelkich zmianach Użytkownicy zostaną poinformowani z odpowiednim wyprzedzeniem za pośrednictwem strony internetowej.</p>
+<p>Niniejsza Polityka Prywatności jest zgodna z przepisami wynikającymi z art. 13 ust. 1 i ust. 2 Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (RODO).</p>
+</div>
+</div>

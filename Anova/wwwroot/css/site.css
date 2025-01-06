@@ -3,6 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 @import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
 
+
 /* Toastr */
 .toast-success {
     background-color: #13d878 !important;
@@ -75,6 +76,7 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 .main {
     min-height: 100%;
     display: flex;
@@ -251,34 +253,120 @@ header {
     margin: 0 auto;
 }
 
-#home {
-    width: 100%;
-    min-height: 35vh;
-    background: url(../images/fon.jpg);
-    background-repeat: no-repeat;
+/*hero*/
+.hero {
+    max-width: 320px;
+    min-height: 432px;
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(17rem,auto));
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: -16px;
-    margin-bottom: 24px;
+    background-color: #2e2f42;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    background-image: url(../images/Hero.jpg);
+    border-radius: 10px;
 }
 
-.home-text h1 {
-    font-size: 3.4rem;
-    color:;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: grid;
+.hero-text {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 72px;
+    max-width: 216px;
+    font-size: 36px;
+    line-height: 1.11;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #FFF3E3;
 }
 
-.home-text p {
-    font-size: 1rem;
-    color:;
-    margin: 0.5rem 0 1.4rem;
+.button-class {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 169px;
+    height: 56px;
+    border-radius: 4px;
+    border: none;
+    padding: 16px 32px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    background-color: #FFF3E3;
+    
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+    .button-class:hover,
+    .button-class:focus {
+        background-color: #FFE0B2;
+    }
+
+
+
+@media (min-width: 768px) {
+    .hero {
+        max-width: 768px;
+        padding-top: 112px;
+        padding-bottom: 112px;
+        background-image: url(../images/Hero.jpg);
+    }
+
+    .hero-text {
+        margin: auto auto 16px auto;
+        max-width: 496px;
+        font-size: 56px;
+        line-height: 1.07;
+        color: #FFF3E3;
+        font-family: "Poppins", serif;
+        font-weight: 700;
+        font-style: normal;
+    }
+}
+
+@media (min-width: 1158px) {
+    .hero {
+        max-width: 1440px;
+        padding-top: 188px;
+        padding-bottom: 188px;
+        background-image: url(../images/Hero.jpg);
+    }
+
+    .hero-text {
+        margin-bottom: 48px;
+        margin: auto auto 16px auto;
+    }
+    .hero-cube {
+        border-radius: 10px;
+        width: 543px;
+        height: 343px;
+        position: relative; /* Нужно для корректной работы псевдоэлемента */
+        z-index: 1; /* Устанавливаем позицию основного содержимого */
+        margin: auto;
+    }
+        .hero-cube::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(0.4rem);
+            background: radial-gradient(231% 135.8% at 0.9% 2.98%, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+            z-index: -1;
+            border-radius: 15px;
+            border: 1px solid #ebebeb;
+        }
+    .hero-container {
+        padding-top: 70px;
+    }
+
+}
+
+/**/
 
 .descrInCard {
     display: flex;
@@ -306,6 +394,7 @@ label.nameInCard {
     line-height: 150%;
     color: #898989;
 }
+
 p, a, form, input, td {
     font-family: "Poppins", serif;
     font-weight: 500;
@@ -314,27 +403,33 @@ p, a, form, input, td {
     line-height: 150%;
 }
 
-    .poppins-semibold {
-        font-family: "Poppins", serif;
-        font-weight: 600;
-        font-style: normal;
-    }
-div {
+.poppins-semibold {
     font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
 }
 
- .poppins-bold {
+div, h5 {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.poppins-bold {
     font-family: "Poppins", serif;
     font-weight: 700;
     font-style: normal;
 }
-h1, h2 {
+
+h1 {
     font-family: "Poppins", serif;
     font-weight: 700;
     font-style: normal;
 }
+h2 {
+    font-family: "Poppins", serif;
+}
+
 a {
     text-decoration: none !important;
 }
@@ -362,7 +457,7 @@ a {
     border-bottom: 2px solid #ebebeb !important;
 }
 
-footer{
+footer {
     margin-top: auto;
 }
 
@@ -378,3 +473,146 @@ footer{
 .main-content {
     background-color: #f8f9fa;
 }
+
+.application-category{
+    border: none;
+    text-align:center;
+
+
+}
+.section-Type {
+    text-align:center;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+
+}
+
+    /* При наведении на ссылку тень добавляется только к изображению */
+    .card-link .card-img-top {
+        transition: transform 0.6s ease, box-shadow 0.6s ease;
+    }
+
+    .card-link:hover .card-img-top {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+
+.section-Our-Products {
+    text-align: center;
+}
+section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+/*team*/
+
+.image-gallery {
+    display: flex;
+    flex-wrap: nowrap;
+   
+}
+
+.image-item {
+    flex: 1 1 auto;
+    width: 250px; /* Ограничение ширины изображения */
+    overflow: hidden;
+}
+.rectangle{
+    height: 400px;
+    
+}
+.square {
+    margin-top: 6%;
+}
+
+.image-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+@media (min-width: 1158px) {
+    .square {
+        margin-top: 70px;
+    }
+
+}
+.instagram-section {
+    background-color: #FCF8F3;
+}
+.image-item img {
+    transition: transform 0.6s ease, box-shadow 0.6s ease; /* Увеличено время анимации */
+}
+
+    .image-item img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+@media (max-width: 1200px) {
+    .rectangle {
+        height: 300px;
+    }
+}
+@media (max-width: 767px) {
+    .rectangle {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-gallery {
+        display: none;
+    }
+
+    .single-image {
+        display: block;
+        text-align: center;
+    }
+        .single-image img {
+            width: 100%; /* Заполняет всю ширину экрана */
+            max-width: 500px; /* Ограничение максимальной ширины */
+            height: auto; /* Сохраняет пропорции */
+            border-radius: 10px; /* Закруглённые углы */
+        }
+}
+
+/* Скрываем общую фотографию на планшетах и выше */
+@media (min-width: 769px) {
+    .single-image {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .obtekaemoe-img {
+        float: left;
+        margin-right: 20px;
+        width: 50%;
+    }
+}
+@media (max-width: 769px) {
+    .obtekaemoe-img {
+        margin-bottom: 20px;
+    }
+}
+@media (min-width: 769px) {
+    .obtekaemoe-img2 {
+        float: right;
+        margin-right: 20px;
+        width: 50%;
+    }
+}
+
+@media (max-width: 769px) {
+    .obtekaemoe-img2 {
+        margin-bottom: 20px;
+    }
+}
+
+
+    /**/
