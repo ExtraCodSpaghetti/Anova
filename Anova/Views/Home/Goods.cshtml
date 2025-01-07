@@ -1,9 +1,19 @@
 ﻿
 @model Anova_Models.ViewModels.HomeVM
 
+<div class="hero-goods container-fluid shadow">
+    <div class="hero-cube-goods">
+        <div class="hero-container-goods" style="margin:auto;">
+            <h1 class="hero-text-goods">
+                Upgrade your home vibe
+            </h1>
 
-<div class="container">
-    <div class="text-center categories poppins-medium">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-4 mt-4" style="background-color: #F9F1E7;">
+    <div class="text-center categories poppins-medium pt-4 pb-2">
         <button class="btn btn-dark filter-button" data-filter="all">Clear</button>
         @foreach (var obj in Model.Categories)
         {
@@ -12,23 +22,28 @@
             </button>
         }
     </div>
-    <div class="text-center categories poppins-medium">
+    <div class="container"><hr></div>
+    
+    <div class="text-center categories poppins-medium pt-2">
         
         @foreach (var obj in Model.ApplicationType)
         {
-            <button class="btn btn-outline-secondary filter-button" data-filter="@obj.Name.Replace(' ','_')">
+            <button class="btn btn-outline-light filter-button text-dark" style="--bs-btn-border-width: 1px; --bs-btn-border-color: #212529" data-filter="@obj.Name.Replace(' ','_')">
                 @obj.Name
             </button>
         }
     </div>
+</div>
     <br />
+    <div class="container">
     <div class="row">
         @foreach (var prod in Model.Products)
         {
             <partial name="_IndividualProductCard" model="prod" class="filter" />
         }
     </div>
-</div>
+    </div>
+
 
 @section Scripts{
     <script>

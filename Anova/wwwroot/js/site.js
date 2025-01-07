@@ -25,6 +25,8 @@ $(document).ready(function () {
     });
 });
 
+
+
 // footer
 //function stickyFooter() {
 //    var footer = document.querySelector("footer");

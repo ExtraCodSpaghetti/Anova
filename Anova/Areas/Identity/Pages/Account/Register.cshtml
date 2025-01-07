@@ -7,10 +7,10 @@
 
         <div class="container form-group">
             <div class="col-10 offset-1">
-                <div class="card">
+            <div class="card" style="border-radius: 10px;">
                     <div class="card-body px-lg-5 pt-4">
                         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                            <h1 class=" col-12 text-info text-center py-4">
+                            <h1 class=" col-12 text-center py-4">
                                 @if (User.IsInRole(WC.AdminRole))
                                 {
                                     <strong>Register an Admin Account</strong>
@@ -52,33 +52,33 @@
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
-                            <div class="py-2">
-                                @if (User.IsInRole(WC.AdminRole))
-                                {
-                                    <button type="submit" class="btn btn-warning form-control">Register Admin User</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="text-dark btn btn-block btn-outline-secondary form-control">Register</button>
-                                }
-                            </div>
+                        <div class="py-3 col-md-5 mx-auto text-center">
+                            @if (User.IsInRole(WC.AdminRole))
+                            {
+                                <button type="submit" class="btn btn-warning form-control">Sing Up Admin User</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="text-dark btn btn-block btn-outline-secondary form-control">Sing Up</button>
+                            }
+                        </div>
                         </form>
                         @if(!User.IsInRole(WC.AdminRole))
                     {
                         
                     
                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <p>
-                                By clicking <em>Register</em> you agree to our <a href="" target="_blank"> terms of service </a>
-                            </p>
+                            <label>
+                                By clicking <em>Register</em> you agree to our <a style="color: #ce3232" asp-area="" asp-controller="Home" asp-action="Privacy">Personal Data Processing Policy</a>
+                            </label>
                             <hr />
-                            <div class="row">
+                            <div class="pt-2 col-md-5 mx-auto text-center">
                                 <p>
                                     @foreach (var provider in Model.ExternalLogins)
                                     {
                                         @if (provider.Name.ToLower().Contains("facebook"))
                                         {
-                                            <button type="submit" class="btn btn-primary form-control"
+                                            <button type="submit" class="btn btn-outline-primary form-control"
                                                     name="provider" value="@provider.Name"
                                                     title="Log in using your @provider.DisplayName account">
                                                 <i class="fab fa-facebook-square"></i> @provider.DisplayName

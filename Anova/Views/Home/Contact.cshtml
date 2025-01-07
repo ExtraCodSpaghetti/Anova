@@ -1,5 +1,156 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿
+<section>
+<div class="container" style="padding-left: 15px;">
+    <h2>Contact us</h2>
+    <span class="pb-3">The harder you work for something, the greater you’ll feel when you achieve it.</span>
+</div>
+</section>
+
+<div class="container">
+<div class="row align-content-center">
+<div class="col-md-6 col-sm-12 pb-5" style="margin-top: 30px;">
+
+    <!-- CONTACT FORM HERE -->
+
+
+
+    <form id="contact-form" role="form" method="post" action="https://api.web3forms.com/submit">
+                <input type="hidden" name="access_key" value="f4c74487-b138-475a-abe3-a1fb83572a11">
+        <div class="row g-3">
+        <div class="col-md-6 col-sm-12">
+            <input type="text" class="form-control" placeholder="Your Name" id="cf-name" name="name" required="">
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+            <input type="email" class="form-control" placeholder="Your Mail" id="cf-email" name="email" required="">
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+                        <textarea class="form-control" rows="6" placeholder="Hi! i’d like to ask about" id="cf-message" name="message"></textarea>
+        </div>
+
+                    <div class="form-check text-left" style="margin-left: 30px; padding-left: 0px;">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required="">
+            <label class="form-check-label" for="flexCheckDefault">
+                            I agree with the
+                            <a style="color: #ce3232" asp-area="" asp-controller="Home" asp-action="Privacy">Personal Data Processing Policy*</a>
+
+            </label>
+        </div>
+                </div>
+
+
+
+
+        <div class="col-md-4 col-sm-12" style="margin-top: 40px;">
+                    <input type="submit" class="btn btn-outline-dark form-control btn-sm" name="submit" value="Send" id="cf-button">
+        </div>
+
+
+    </form>
+
+</div>
+
+
+    <div class="container col-md-6 ">
+        <div class="google-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d626.4371909078096!2d16.97423666968517!3d51.09464394049454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc18c36c13a8d%3A0x58f1266411bccec4!2sAleksandra%20Ostrowskiego%2022%2C%2053-238%20Wroc%C5%82aw!5e0!3m2!1sru!2spl!4v1736207739793!5m2!1sru!2spl"
+            width="100%" height="350" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+ 
+
+</div>
+</div>
+
+<div class="container my-1 mb-5 pb-3">
+    <div class="row text-center">
+        <!-- Working Time -->
+        <div class="col-md-4 mt-3">
+            <div >
+                <svg class="icon-contact" style="margin-bottom: 15px;" xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 512 512" fill="currentColor"><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" /></svg>
+                <div>
+                    <h5>Working Time</h5>
+                    <p>Monday–Friday: 9:00–22:00</p>
+                    
+                    <p>Saturday–Sunday: 9:00–21:00</p>
+                </div>
+            </div>
+        </div>
+        <!-- Phone -->
+        <div class="col-md-4 mt-3">
+            <div >
+                <svg class="icon-contact" style="margin-bottom: 15px;" xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 512 512" fill="currentColor"><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" /></svg>
+                <div>
+                    <h5>Phone</h5>
+                    <div class="d-flex flex-column" style="gap:13px;">
+                        <a class="text-dark" href="tel:+845466789">Mobile: + (84) 546-6789</a>
+                        <a class="text-dark" href="tel:+844566789">Hotline: + (84) 456-6789</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Address -->
+        <div class="col-md-4 mt-3">
+            <div >
+                <svg class="icon-contact" style="margin-bottom: 15px;" xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 0 512 512" fill="currentColor"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" /></svg>
+                <div>
+                    <h5>Address</h5>
+                    <a class="text-dark" href="https://www.google.com/maps?q=Aleksandra+Ostrowskiego+22,+53-238+Wroclaw">
+                        Aleksandra Ostrowskiego 22, 53-238 Wrocław
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+     document.getElementById('contact-form').addEventListener('submit', function (event) {
+           event.preventDefault();  // Предотвращаем стандартное поведение формы
+
+           const form = event.target;
+           const formData = new FormData(form);
+
+           fetch(form.action, {
+               method: form.method,
+               body: formData,
+               headers: {
+                   'Accept': 'application/json'
+               }
+           })
+               .then(response => {
+                   if (response.ok) {
+                       // Показываем SweetAlert уведомление об успешной отправке
+                       Swal.fire({
+                           icon: 'success',
+                            title: 'Thank you!',
+                            text: 'The message has been successfully sent!',
+                           confirmButtonText: 'ОК'
+                       });
+                       form.reset();  // Очистка формы
+                   } else {
+                       // Показываем SweetAlert уведомление об ошибке
+                       Swal.fire({
+                           icon: 'error',
+                            title: 'Error',
+                            text: 'There was an error while sending the message.',
+                           confirmButtonText: 'ОК'
+                       });
+                   }
+               })
+               .catch(() => {
+                   // Показываем SweetAlert уведомление об ошибке, если запрос не удался
+                   Swal.fire({
+                       icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to send the message. Try again later.',
+                       confirmButtonText: 'ОК'
+                   });
+               });
+       });
+    </script>
 }
+
