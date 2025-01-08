@@ -34,6 +34,7 @@ namespace Anova.Controllers
 
         [BindProperty]
         public ProductUserVM ProductUserVM { get; set; }
+
         public CartController(IWebHostEnvironment webHostEnvironment, IEmailSender emailSender,
             IApplicationUserRepository userRepo, IProductRepository prodRepo,
             IInquiryHeaderRepository inqHRepo, IInquiryDetailRepository inqDRepo,
@@ -49,9 +50,9 @@ namespace Anova.Controllers
             _orderDRepo = orderDRepo;
             _orderHRepo = orderHRepo;
         }
+
         public IActionResult Index()
         {
-
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
             if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart) != null
                 && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart).Count() > 0)
@@ -89,7 +90,6 @@ namespace Anova.Controllers
             return RedirectToAction(nameof(Summary));
         }
 
-
         public IActionResult Summary()
         {
             ApplicationUser applicationUser;
@@ -111,11 +111,6 @@ namespace Anova.Controllers
                 {
                     applicationUser = new ApplicationUser();
                 }
-
-                var gateway = _brain.GetGateway();
-                var clientToken = gateway.ClientToken.Generate();
-                ViewBag.ClientToken = clientToken;
-
             }
             else
             {
@@ -126,6 +121,9 @@ namespace Anova.Controllers
                 applicationUser = _userRepo.FirstOrDefault(u => u.Id == claim.Value);
             }
 
+            var gateway = _brain.GetGateway();
+            var clientToken = gateway.ClientToken.Generate();
+            ViewBag.ClientToken = clientToken;
 
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
             if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart) != null
@@ -143,14 +141,12 @@ namespace Anova.Controllers
                 ApplicationUser = applicationUser,
             };
 
-
             foreach (var cartObj in shoppingCartList)
             {
                 Product prodTemp = _prodRepo.FirstOrDefault(u => u.Id == cartObj.ProductId);
                 prodTemp.TempAmounts = cartObj.Amounts;
                 ProductUserVM.ProductList.Add(prodTemp);
             }
-
 
             return View(ProductUserVM);
         }
@@ -160,156 +156,136 @@ namespace Anova.Controllers
         [ActionName("Summary")]
         public async Task<IActionResult> SummaryPost(IFormCollection collection, ProductUserVM ProductUserVM)
         {
-
-
-
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            if (User.IsInRole(WC.AdminRole))
+            //we need to create an order
+            //var orderTotal = 0.0;
+            //foreach(Product prod in ProductUserVM.ProductList)
+            //{
+            //    orderTotal += prod.Price * prod.TempSqFt;
+            //}
+
+            //we need to create an inquiry
+            
+
+            OrderHeader orderHeader = new OrderHeader()
             {
-                //we need to create an order
-                //var orderTotal = 0.0;
-                //foreach(Product prod in ProductUserVM.ProductList)
-                //{
-                //    orderTotal += prod.Price * prod.TempSqFt;
-                //}
-                OrderHeader orderHeader = new OrderHeader()
+                CreatedByUserId = claim.Value,
+                FinalOrderTotal = ProductUserVM.ProductList.Sum(x => x.TempAmounts * x.Price),
+                City = ProductUserVM.ApplicationUser.City,
+                StreetAddress = ProductUserVM.ApplicationUser.StreetAddress,
+                State = ProductUserVM.ApplicationUser.State,
+                PostalCode = ProductUserVM.ApplicationUser.PostalCode,
+                FullName = ProductUserVM.ApplicationUser.FullName,
+                Email = ProductUserVM.ApplicationUser.Email,
+                PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
+                OrderDate = DateTime.Now,
+                OrderStatus = WC.StatusPending
+            };
+            _orderHRepo.Add(orderHeader);
+            _orderHRepo.Save();
+
+            var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
+           + "templates" + Path.DirectorySeparatorChar.ToString() +
+           "Inquiry.html";
+
+            var subject = "New Inquiry";
+            string HtmlBody = "";
+            using (StreamReader sr = System.IO.File.OpenText(PathToTemplate))
+            {
+                HtmlBody = sr.ReadToEnd();
+            }
+            //Name: { 0}
+            //Email: { 1}
+            //Phone: { 2}
+            //Products: {3}
+
+            StringBuilder productListSB = new StringBuilder();
+            decimal totalOrderPrice = 0; // Переменная для хранения общей стоимости заказа
+
+            foreach (var prod in ProductUserVM.ProductList)
+            {
+                decimal productTotal = (decimal)(prod.Price * prod.TempAmounts); // Рассчитываем стоимость текущего товара
+                totalOrderPrice += productTotal; // Добавляем стоимость текущего товара к общей сумме
+                productListSB.Append($" - Name: {prod.Name} <span style='font-size:14px;'> (Amounts: {prod.TempAmounts} with Total Price: {productTotal})</span><br />");
+            }
+
+            // Добавляем информацию о общей стоимости заказа
+            productListSB.Append($"<br /><strong>Total Order Price: {totalOrderPrice}</strong> <br /><strong>Your order identification number : {orderHeader.Id}</strong> ");
+
+            string messageBody = string.Format(HtmlBody,
+                ProductUserVM.ApplicationUser.FullName,
+                ProductUserVM.ApplicationUser.Email,
+                ProductUserVM.ApplicationUser.PhoneNumber,
+                productListSB.ToString());
+
+            await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
+
+
+            foreach (var prod in ProductUserVM.ProductList)
+            {
+                OrderDetail orderDetail = new OrderDetail()
                 {
-                    CreatedByUserId = claim.Value,
-                    FinalOrderTotal = ProductUserVM.ProductList.Sum(x => x.TempAmounts * x.Price),
-                    City = ProductUserVM.ApplicationUser.City,
-                    StreetAddress = ProductUserVM.ApplicationUser.StreetAddress,
-                    State = ProductUserVM.ApplicationUser.State,
-                    PostalCode = ProductUserVM.ApplicationUser.PostalCode,
-                    FullName = ProductUserVM.ApplicationUser.FullName,
-                    Email = ProductUserVM.ApplicationUser.Email,
-                    PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
-                    OrderDate = DateTime.Now,
-                    OrderStatus = WC.StatusPending
+                    OrderHeaderId = orderHeader.Id,
+                    PricePerAmounts = prod.Price,
+                    Amounts = prod.TempAmounts,
+                    ProductId = prod.Id
                 };
-                _orderHRepo.Add(orderHeader);
-                _orderHRepo.Save();
+                _orderDRepo.Add(orderDetail);
+            }
+            _orderDRepo.Save();
+            TempData[WC.Success] = "Inquiry submitted successfully";
 
-                foreach (var prod in ProductUserVM.ProductList)
+            string nonceFromTheClient = collection["payment_method_nonce"];
+
+            var request = new TransactionRequest
+            {
+                Amount = Convert.ToDecimal(orderHeader.FinalOrderTotal),
+                PaymentMethodNonce = nonceFromTheClient,
+                OrderId = orderHeader.Id.ToString(),
+                Options = new TransactionOptionsRequest
                 {
-                    OrderDetail orderDetail = new OrderDetail()
-                    {
-                        OrderHeaderId = orderHeader.Id,
-                        PricePerAmounts = prod.Price,
-                        Amounts = prod.TempAmounts,
-                        ProductId = prod.Id
-                    };
-                    _orderDRepo.Add(orderDetail);
-
+                    SubmitForSettlement = true
                 }
-                _orderDRepo.Save();
+            };
 
-                string nonceFromTheClient = collection["payment_method_nonce"];
+            var gateway = _brain.GetGateway();
+            Result<Transaction> result = gateway.Transaction.Sale(request);
 
-                var request = new TransactionRequest
-                {
-                    Amount = Convert.ToDecimal(orderHeader.FinalOrderTotal),
-                    PaymentMethodNonce = nonceFromTheClient,
-                    OrderId = orderHeader.Id.ToString(),
-                    Options = new TransactionOptionsRequest
-                    {
-                        SubmitForSettlement = true
-                    }
-                };
+            if (result.Target.ProcessorResponseText == "Approved")
+            {
+                orderHeader.TransactionId = result.Target.Id;
+                orderHeader.OrderStatus = WC.StatusApproved;
 
-                var gateway = _brain.GetGateway();
-                Result<Transaction> result = gateway.Transaction.Sale(request);
-
-                if (result.Target.ProcessorResponseText == "Approved")
-                {
-                    orderHeader.TransactionId = result.Target.Id;
-                    orderHeader.OrderStatus = WC.StatusApproved;
-                }
-                else
-                {
-                    orderHeader.OrderStatus = WC.StatusCancelled;
-                }
-                _orderHRepo.Save();
-                return RedirectToAction(nameof(InquiryConfirmation), new { id = orderHeader.Id });
-
-
+                // Добавляем данные для SweetAlert2
+                TempData["SwalIcon"] = "info"; // Иконка: success, error, info, warning
+                TempData["SwalTitle"] = "Payment has been made successfully!";
+                TempData["SwalText"] = "<hr /> You will receive a message with information about your order. In case of questions about delivery or other questions, please call the phone numbers in the Contact Us tab. There you can also use a convenient form for contacting us by e-mail.";
             }
             else
             {
-                //we need to create an inquiry
-                var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
-               + "templates" + Path.DirectorySeparatorChar.ToString() +
-               "Inquiry.html";
+                orderHeader.OrderStatus = WC.StatusCancelled;
 
-                var subject = "New Inquiry";
-                string HtmlBody = "";
-                using (StreamReader sr = System.IO.File.OpenText(PathToTemplate))
-                {
-                    HtmlBody = sr.ReadToEnd();
-                }
-                //Name: { 0}
-                //Email: { 1}
-                //Phone: { 2}
-                //Products: {3}
-
-                StringBuilder productListSB = new StringBuilder();
-                foreach (var prod in ProductUserVM.ProductList)
-                {
-                    productListSB.Append($" - Name: {prod.Name} <span style='font-size:14px;'> (ID: {prod.Id})</span><br />");
-                }
-
-                string messageBody = string.Format(HtmlBody,
-                    ProductUserVM.ApplicationUser.FullName,
-                    ProductUserVM.ApplicationUser.Email,
-                    ProductUserVM.ApplicationUser.PhoneNumber,
-                    productListSB.ToString());
-
-
-                await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
-
-                InquiryHeader inquiryHeader = new InquiryHeader()
-                {
-                    ApplicationUserId = claim.Value,
-                    FullName = ProductUserVM.ApplicationUser.FullName,
-                    Email = ProductUserVM.ApplicationUser.Email,
-                    PhoneNumber = ProductUserVM.ApplicationUser.PhoneNumber,
-                    InquiryDate = DateTime.Now
-
-                };
-
-                _inqHRepo.Add(inquiryHeader);
-                _inqHRepo.Save();
-
-                foreach (var prod in ProductUserVM.ProductList)
-                {
-                    InquiryDetail inquiryDetail = new InquiryDetail()
-                    {
-                        InquiryHeaderId = inquiryHeader.Id,
-                        ProductId = prod.Id,
-
-                    };
-                    _inqDRepo.Add(inquiryDetail);
-
-                }
-                _inqDRepo.Save();
-                TempData[WC.Success] = "Inquiry submitted successfully";
+                // Добавляем данные для SweetAlert2 (ошибка)
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Error";
+                TempData["SwalText"] = "The payment was declined. Please try again.";
             }
-
-
-
-            return RedirectToAction(nameof(InquiryConfirmation));
-        }
-        public IActionResult InquiryConfirmation(int id = 0)
-        {
-            OrderHeader orderHeader = _orderHRepo.FirstOrDefault(u => u.Id == id);
+            _orderHRepo.Save();
             HttpContext.Session.Clear();
-            return View(orderHeader);
+            return RedirectToAction("Index", "Home");
         }
+
+        //public IActionResult InquiryConfirmation(int id = 0)
+        //{
+        //    OrderHeader orderHeader = _orderHRepo.FirstOrDefault(u => u.Id == id);
+        //    HttpContext.Session.Clear();
+        //    return View(orderHeader);
+        //}
 
         public IActionResult Remove(int id)
         {
-
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
             if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart) != null
                 && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WC.SessionCart).Count() > 0)
@@ -336,7 +312,6 @@ namespace Anova.Controllers
             HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
             return RedirectToAction(nameof(Index));
         }
-
 
         public IActionResult Clear()
         {

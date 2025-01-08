@@ -183,6 +183,24 @@
     </section>
 
 
+    @section Scripts{
+    @if (ViewBag.SwalIcon != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: '@ViewBag.SwalIcon', // Тип оповещения ('success', 'error', 'info', 'warning')
+                title: '@ViewBag.SwalTitle', // Заголовок сообщения
+                html: '@Html.Raw(ViewBag.SwalText)', // Используем html вместо text
+                confirmButtonText: 'OK', // Текст кнопки
+                background: '#fefefe', // Фон модального окна
+                color: '#333', // Цвет текста
+                confirmButtonColor: '#3085d6' // Цвет кнопки подтверждения
+            });
+        </script>
+    }
+    }
+
 
 
 

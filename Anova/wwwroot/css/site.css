@@ -3,7 +3,6 @@ for details on configuring this project to bundle and minify static web assets. 
 
 @import url('https://fonts.googleapis.com/css2?family=Alkatra&display=swap');
 
-
 /* Toastr */
 .toast-success {
     background-color: #13d878 !important;
@@ -295,7 +294,6 @@ header {
     line-height: 1.5;
     letter-spacing: 0.04em;
     background-color: #FFF3E3;
-    
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -304,8 +302,6 @@ header {
     .button-class:focus {
         background-color: #FFE0B2;
     }
-
-
 
 @media (min-width: 768px) {
     .hero {
@@ -339,6 +335,7 @@ header {
         margin-bottom: 48px;
         margin: auto auto 16px auto;
     }
+
     .hero-cube {
         border-radius: 10px;
         width: 543px;
@@ -347,6 +344,7 @@ header {
         z-index: 1; /* Устанавливаем позицию основного содержимого */
         margin: auto;
     }
+
         .hero-cube::before {
             content: '';
             position: absolute;
@@ -360,10 +358,10 @@ header {
             border-radius: 15px;
             border: 1px solid #ebebeb;
         }
+
     .hero-container {
         padding-top: 70px;
     }
-
 }
 
 /**/
@@ -385,19 +383,17 @@ header {
     border-radius: 10px;
 }
 
-
-
-    .hero-text-goods {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 72px;
-        max-width: 216px;
-        font-size: 36px;
-        line-height: 1.11;
-        letter-spacing: 0.02em;
-        text-align: center;
-        color: #FFF3E3;
-    }
+.hero-text-goods {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 72px;
+    max-width: 216px;
+    font-size: 36px;
+    line-height: 1.11;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: #FFF3E3;
+}
 
 .button-class-goods {
     display: block;
@@ -421,8 +417,6 @@ header {
     .button-class-goods:focus {
         background-color: #FFE0B2;
     }
-
-
 
 @media (min-width: 768px) {
     .hero-goods {
@@ -457,7 +451,6 @@ header {
         margin: auto auto 16px auto;
     }
 
-
     .hero-container-goods {
         padding-top: 70px;
     }
@@ -476,6 +469,38 @@ label.nameInCard {
 }
 
 /*fonts*/
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
 
 .poppins-regular {
     font-family: "Poppins", serif;
@@ -523,6 +548,7 @@ h1 {
     font-weight: 700;
     font-style: normal;
 }
+
 h2 {
     font-family: "Poppins", serif;
 }
@@ -571,20 +597,18 @@ footer {
     background-color: #f8f9fa;
 }
 
-.application-category{
+.application-category {
     border: none;
-    text-align:center;
-
-
+    text-align: center;
 }
+
 .section-Type {
-    text-align:center;
+    text-align: center;
 }
 
 .card-link {
     text-decoration: none;
     color: inherit;
-
 }
 
     /* При наведении на ссылку тень добавляется только к изображению */
@@ -597,10 +621,10 @@ footer {
         transform: scale(1.05);
     }
 
-
 .section-Our-Products {
     text-align: center;
 }
+
 section {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -611,7 +635,6 @@ section {
 .image-gallery {
     display: flex;
     flex-wrap: nowrap;
-   
 }
 
 .image-item {
@@ -619,10 +642,11 @@ section {
     width: 250px; /* Ограничение ширины изображения */
     overflow: hidden;
 }
-.rectangle{
+
+.rectangle {
     height: 400px;
-    
 }
+
 .square {
     margin-top: 6%;
 }
@@ -637,11 +661,12 @@ section {
     .square {
         margin-top: 70px;
     }
-
 }
+
 .instagram-section {
     background-color: #FCF8F3;
 }
+
 .image-item img {
     transition: transform 0.6s ease, box-shadow 0.6s ease; /* Увеличено время анимации */
 }
@@ -650,11 +675,13 @@ section {
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
+
 @media (max-width: 1200px) {
     .rectangle {
         height: 300px;
     }
 }
+
 @media (max-width: 767px) {
     .rectangle {
         height: 200px;
@@ -670,6 +697,7 @@ section {
         display: block;
         text-align: center;
     }
+
         .single-image img {
             width: 100%; /* Заполняет всю ширину экрана */
             max-width: 500px; /* Ограничение максимальной ширины */
@@ -692,11 +720,13 @@ section {
         width: 50%;
     }
 }
+
 @media (max-width: 769px) {
     .obtekaemoe-img {
         margin-bottom: 20px;
     }
 }
+
 @media (min-width: 769px) {
     .obtekaemoe-img2 {
         float: right;
@@ -715,7 +745,18 @@ section {
     --bs-btn-hover-bg: #FFE0B2 !important;
 }
 
+.delivery-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9fbfc;
+    border-left: 4px solid red;
+    border-radius: 4px;
+}
 
+    .delivery-info svg {
+        fill: red;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
 
-
-    /**/
+/**/

@@ -46,6 +46,14 @@ namespace Anova.Controllers
                 Categories = _catRepo.GetAll(),
                 ApplicationType = _applRepo.GetAll()
             };
+
+            if (TempData.ContainsKey("SwalIcon"))
+            {
+                ViewBag.SwalIcon = TempData["SwalIcon"];
+                ViewBag.SwalTitle = TempData["SwalTitle"];
+                ViewBag.SwalText = TempData["SwalText"];
+            }
+
             return View(HomeVm);
         }
 

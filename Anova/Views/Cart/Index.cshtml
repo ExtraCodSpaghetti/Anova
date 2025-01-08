@@ -1,126 +1,123 @@
 ﻿@using Anova_Utility;
 @model List<Product>
 @{
-  var orderTotal = 0.0;
- }
+    var orderTotal = 0.0;
+}
+
+<section>
     <form method="post">
         <br />
         <div class="backgroundWhiteBorder">
-            <div class="container ">
-                <div class="container">
-                    <div class="post">
-                        <div class="card-header text-dark ml-0 row container">
+            <div class="container">
+                <div class="row">
+                    <!-- Секция товаров -->
+                    <div class="post col-12 col-lg-8 mb-4">
+                        <div class="card-header text-dark ml-0 mb-5 mb-lg-0 row">
                             <div class="col-6">
                                 <i class="fa fa-shopping-cart"></i> &nbsp;
                                 Shopping Cart
                             </div>
-                            <div class="col-6 text-right">
-                                <a asp-action="Clear" class="btn btn-outline-danger btn-square btn-sm">Clear Cart</a>
-                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary btn-square btn-sm">Continue Shopping</a>
+                            <div class="col-6 text-right ">
+                                <a asp-action="Clear" class="btn btn-outline-danger btn-square btn-sm mb-2">Clear Cart</a>
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary btn-square btn-sm mb-2">Continue Shopping</a>
+                                <a asp-action="UpdateCart" class="btn btn-outline-warning btn-square btn-sm mb-2" type="submit" formmethod="post" name="Update" value="Update Card">Update List</a>
+                                
                             </div>
                         </div>
                         <div class="card-body">
-                            
-
                             @if (Model.Count() > 0)
-                        {
-
-                            <div class=" d-none d-lg-block pt-3">
-                                <div class="row" style="color:#821f3d">
-                                    <div class="col-lg-2">
-                                    </div>
-                                   
-                                        <div class="col-12 col-lg-3">
-                                            Product Details
-                                        </div>
-                                    
-                                    <div class="col-12 col-lg-2">
-                                        Price
-                                    </div>
-                                    
-                                        <div class="col-6 col-lg-2">
-                                            Amounts
-                                        </div>
-                                        <div class="col-6 col-lg-2">
-                                            Total Price
-                                        </div>
-                                   
-                                    <div class="col-6 col-sm-4 col-lg-1">
+                            {
+                                <div class="d-none d-lg-block p-3 mt-5 mb-5" style="background-color: #F9F1E7; --bs-card-border-radius: var(--bs-border-radius);">
+                                    <div class="row">
+                                        <div class="col-lg-2"></div>
+                                        <div class="col-12 col-lg-4">Product Details</div>
+                                        <div class="col-12 col-lg-2">Price</div>
+                                        <div class="col-6 col-lg-2">Amounts</div>
+                                        <div class="col-6 col-lg-2">Total Price</div>
+                                        <div class="col-6 col-sm-4 col-lg-1"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <hr /> 
-                            @for(int i=0;i<Model.Count;i++)
-                            {
-                                <input hidden asp-for="@Model[i].Id"/>
-                                <div class="row h-100">
-                                    <div class="col-4 col-md-2 text-center py-2">
-                                        <img src="@WC.ImagePath@Model[i].Image" class="rounded" width="100%" />
-                                    </div>
-                                   
-                                        <div class="col-8 col-lg-3">
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <input hidden asp-for="@Model[i].Id" />
+                                    <div class="row h-100 align-items-center pb-5">
+                                        <!-- Изображение -->
+                                        <div class="col-4 col-sm-3 col-md-2 text-center py-2">
+                                            <img src="@WC.ImagePath@Model[i].Image" class="rounded img-fluid" />
+                                        </div>
+
+                                        <!-- Название и описание -->
+                                        <div class="col-8 col-sm-4 col-lg-3">
                                             <h5>@Model[i].Name</h5>
                                             <div style="font-size:11px;">@Model[i].ShortDesc</div>
                                         </div>
-                                    
-                                    <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                        <span style="font-size:17px;"> $@Model[i].Price</span>
-                                    </div>
-                                   
-                                        <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                            <input type ="text" asp-for="@Model[i].TempAmounts" class="form-control"/>
-                                            <span asp-validation-for="@Model[i].TempAmounts" class="text-danger"></span>
-                                        </div> 
-                                        <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                            <span style="font-size:17px;"> $@(Model[i].Price * Model[i].TempAmounts)</span> 
+
+                                        <!-- Цена -->
+                                        <div class="col-4 col-sm-2 col-lg-3 text-sm-center pt-lg-4">
+                                            <span style="font-size:17px;"> $@Model[i].Price</span>
                                         </div>
-                                    
-                                    <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                        <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-outline-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+
+                                        <!-- Количество -->
+                                        <div class="col-3 col-sm-2 col-lg-1 pt-lg-4">
+                                            <input type="text" asp-for="@Model[i].TempAmounts" class="form-control" style="padding-left: 5px;padding-right: 0px;" />
+                                            <span asp-validation-for="@Model[i].TempAmounts" class="text-danger"></span>
+                                        </div>
+
+                                        <!-- Общая стоимость -->
+                                        <div class="col-4 col-sm-2 d-none d-lg-block pt-lg-4 text-sm-right">
+                                            <span style="font-size:17px;"> $@(Model[i].Price * Model[i].TempAmounts)</span>
+                                        </div>
+
+                                        <!-- Кнопка удаления -->
+                                        <div class="col-4 col-sm-1 col-lg-1 p-0 pt-lg-4 text-center">
+                                            <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-outline-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                orderTotal += Model[i].Price * Model[i].TempAmounts;
-                                
+                                    orderTotal += Model[i].Price * Model[i].TempAmounts;
+                                }
                             }
-                            
-                                <div class="row">
-                                    <div class="col-12 text-right pr-4" style="color:#821f3d">
-                                       Order Total : @string.Format("{0:C}", orderTotal)
-                                    </div> 
-                                </div>
-                            
+                            else
+                            {
+                                <p>&nbsp; Please add items to cart.</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Раздел с итогами корзины -->
+                    <div class="col-12 col-lg-4">
+                        <div class="card p-4" style="background-color: #F9F1E7; border:none;">
+                            <h4 class="text-dark">Cart Totals</h4>
                             <hr />
-                        }                       
-                        else
-                        {
-                            <p>&nbsp; Please add items to cart.</p>
-                        }
-                          </div>
-                        <div class="card-footer">
-                            <div class="row">
 
-                                 <div class="col-6 col-md-3 offset-md-6">
-                                
-                                    <input type="submit" asp-action="UpdateCart" formmethod="post" name="Update" value="Update Card"
-                                    class="btn btn-warning btn-square form-control btn-lg"/>
-                                
-                            </div>
+                            @if (Model.Count > 0)
+                            {
+                                @for (int i = 0; i < Model.Count; i++)
+                                {
+                                    <div class="d-flex justify-content-between">
+                                        <span class="mb-2">@Model[i].Name</span>
+                                        <span class="mb-2" style="font-size:17px;"> $@(Model[i].Price * Model[i].TempAmounts)</span>
+                                    </div>
+                                }
+                            }
 
-                                <div class="col-6 col-md-3">
-                                    <button type="submit" class="btn btn-dark btn-success form-control btn-lg">
-                                        <span>Continue</span>
-                                    </button>
-                                </div>
+                            <hr />
+                            <div class="d-flex justify-content-between mt-3">
+                                <strong>Total</strong>
+                                <strong class="text-warning">@string.Format("{0:C}", orderTotal)</strong>
                             </div>
+                            <button type="submit" class="btn btn-dark btn-block mt-4">
+                                Check Out
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    
-    @section Scripts{
-        <partial name="_ValidationScriptsPartial"/>
-    }
+</section>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

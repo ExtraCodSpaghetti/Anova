@@ -104,7 +104,7 @@
             <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-controller="Home" asp-action="Goods">Shop</a></li>
             <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
             <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
-            <li class="nav-item"><a class="nav-link px-2 text-body-secondary" asp-area="" asp-controller="Home" asp-action="Returns">Returns Policy</a></li>
+           
         </ul>
         <div class="container justify-content-center" style="display: flex;">
             <!-- Facebook -->
@@ -153,16 +153,6 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Preconnect для ускорения загрузки шрифтов -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Preload шрифтов с автоматическим применением -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.rel='stylesheet'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    </noscript>
 
     @await RenderSectionAsync("Scripts", required: false)
     <ejs-scripts></ejs-scripts>

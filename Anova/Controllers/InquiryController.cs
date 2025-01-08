@@ -13,7 +13,7 @@ using Anova_Models.ViewModels;
 
 namespace Anova.ApplicationTypeController 
 {
-    [Authorize(Roles = WC.AdminRole)]
+    
     public class InquiryController : Controller
     {
        private readonly IInquiryDetailRepository _inqDRepo;

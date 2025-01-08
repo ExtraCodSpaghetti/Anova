@@ -1,136 +1,152 @@
 ﻿@model Anova_Models.ViewModels.ProductUserVM
 
+<section>
 <form method="post" id="payment-form">
     <br />
     <div class="backgroundWhiteBorder">
         <div class="container">
             <div class="container">
-                <div class="card-header text-dark ml-0 row container">
+                <div class="card-header text-dark ml-0 row container col-12 col-lg-12 mb-4">
                     <div class="col-6">
-                        <i class="fa fa-shopping-cart"></i> &nbsp;
-                        Order Summary
+                            <h1 class="d-flex justify-content-between mb-3">
+                                <span>Billing details</span>
+                            </h1>
                     </div>
                     <div class="col-6 text-right">
-                        <a class="btn btn-outline-secondary btn-square btn-sm" asp-action="Index">Back to Cart</a>
+                        <a class="btn btn-outline-dark btn-square btn-sm mt-3" asp-action="Index">Back to Cart</a>
                     </div>
                 </div>
                 <div class="card-body">
                         <div class="row">
-                            <div class="col-12 col-lg-7 pb-4">
+                            <div class="col-12 col-lg-5 pb-4">
                                 <div class="row my-1">
-                                    <h4 class="d-flex justify-content-between mb-3">
-                                        <span style="color:#821f3d">User Details:</span>
-                                    </h4>
+                                    <!-- Empty row for spacing -->
                                 </div>
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <label>Name</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.FullName" required type="text" class="form-control" />
-                                        @*<span asp-validation-for="ApplicationUser.FullName" class="text-danger"></span>*@
+                                        <input asp-for="ApplicationUser.FullName" required type="text" class="form-control" oninput="validateNoCyrillic(this)" />
                                     </div>
                                 </div>
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <label>Phone</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.PhoneNumber" required type="text" class="form-control" />
-                                        @*<span asp-validation-for="ApplicationUser.PhoneNumber" class="text-danger"></span>*@
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">+48</span>
+                                            </div>
+                                            <input asp-for="ApplicationUser.PhoneNumber" placeholder="Phone Number" required type="text" class="form-control" oninput="validateNoCyrillic(this)" />
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <label>Email</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.Email" required type="text" class="form-control" />
-                                        @*<span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>*@
+                                        <input asp-for="ApplicationUser.Email" required type="text" class="form-control" oninput="validateNoCyrillic(this)" />
                                     </div>
                                 </div>
-                                 @if (User.IsInRole(Anova_Utility.WC.AdminRole))
-                            {
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <label>Street Address</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.StreetAddress" required type="text" class="form-control" />
-                                        @* <span asp-validation-for="ApplicationUser.StreetAddress" class="text-danger"></span>*@
+                                        <input asp-for="ApplicationUser.StreetAddress" required type="text" class="form-control" oninput="validateNoCyrillic(this)" />
                                     </div>
                                 </div>
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <label>City</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.City" type="text" required class="form-control" />
-                                        @*<span asp-validation-for="ApplicationUser.City" class="text-danger"></span>*@
+                                        <input asp-for="ApplicationUser.City" type="text" required class="form-control" oninput="validateNoCyrillic(this)" />
                                     </div>
                                 </div>
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <label>Postal Code</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.PostalCode" type="text" required class="form-control" />
-                                        @*<span asp-validation-for="ApplicationUser.PostalCode" class="text-danger"></span>*@
+                                        <input asp-for="ApplicationUser.PostalCode" type="text" required class="form-control" oninput="validateNoCyrillic(this)" />
                                     </div>
                                 </div>
+
                                 <div class="row my-1 py-2">
-                                    <div class="col-3">
-                                        <label>State</label>
-                                    </div>
-                                    <div class="col-8">
-                                        <input asp-for="ApplicationUser.State" type="text" required class="form-control" />
-                                        @*<span asp-validation-for="ApplicationUser.State" class="text-danger"></span>*@
+                                    <div class="col-12">
+                                        <label>Country</label>
+                                        <input asp-for="ApplicationUser.State" type="text" required class="form-control" oninput="validateNoCyrillic(this)" />
                                     </div>
                                 </div>
-                            }
-                        </div>
-                             <div class="col-12 col-lg-5 row">
-                                <div class="col-12">
-                                    <h4 class="d-flex justify-content-between mb-3">
-                                        <span style="color:#821f3d">Summary:</span>
-                                    </h4>
-                                    <ul class="list-group mb-3">
 
-                                        @{ var orderTotal = 0.0;}
+                                @if (User.IsInRole(Anova_Utility.WC.CustomerRole))
+                                {
+                                    <div class="col-12 text-center">
 
-                                        @for (int i=0;i< Model.ProductList.Count();i++)
-                                        {
-                                            <input type="hidden" asp-for="@Model.ProductList[i].Id" />
-                                            <input type="hidden" asp-for="@Model.ProductList[i].Name" />
-                                            <input type="hidden" asp-for="@Model.ProductList[i].Price" />
-                                            <input type="hidden" asp-for="@Model.ProductList[i].TempAmounts" />
-                                            <li class="list-group-item d-flex justify-content-between">
-                                                <div>
-                                                    <h6 class="my-0">@Model.ProductList[i].Name</h6>
-                                                <small class="text-muted">Amounts: @Model.ProductList[i].TempAmounts</small>
-                                                </div>
-                                                <small class="text-muted">$@(Model.ProductList[i].Price * @Model.ProductList[i].TempAmounts)</small>
-                                            </li>
-                                            orderTotal += Model.ProductList[i].Price * @Model.ProductList[i].TempAmounts;
-                                        }
-                                        <li class="list-group-item d-flex justify-content-between bg-light">
-                                                <small class="text-info"> Total (USD)</small>
-                                                <strong class="text-info">$@orderTotal</strong>
-                                            </li>
-                                    </ul>
-                                </div>
-                            @if (User.IsInRole(Anova_Utility.WC.AdminRole))
-                            {
-                                <div class="col-12">
-                                    
                                         <div class="container">
                                             <div id="dropin-container"></div>
                                             <input id="nonce" name="payment_method_nonce" type="hidden" />
                                         </div>
-                                    
+
+                                    </div>
+                                }
+
+                            </div>
+                            <div class="col-lg-1"></div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="card p-4" style=" border:none;">
+                                        
+
+                                        @{
+                                            var orderTotal = 0.0;
+                                        }
+                                            @for (int i = 0; i < Model.ProductList.Count; i++)
+                                            {
+                                            <input type="hidden" asp-for="@Model.ProductList[i].Id" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].Name" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].Price" />
+                                            <input type="hidden" asp-for="@Model.ProductList[i].TempAmounts" />
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="mb-2">@Model.ProductList[i].Name</span>
+                                                    <span class="mb-2" style="font-size:17px;"> $@(Model.ProductList[i].Price * @Model.ProductList[i].TempAmounts)</span>
+                                                </div>
+                                            orderTotal += Model.ProductList[i].Price * @Model.ProductList[i].TempAmounts;
+                                            }
+
+                                        
+
+                                        <hr />
+                                        <div class="d-flex justify-content-between mt-3">
+
+                                            <strong>Total</strong>
+                                            <strong class="text-warning">@string.Format("{0:C}", @orderTotal)</strong>
+                                        </div>
+                                    <hr />
+
+
+                                    <div class="delivery-info">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 640 512"><path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" /></svg>
+                                            <strong>Delivery Information</strong>
+                                            <p>
+                                                We care about your comfort! Delivery is carried out exclusively by courier directly to your home.
+                                                You do not need to go anywhere - we will bring all orders to the specified address. Enjoy your
+                                                purchases, and we will make sure that they are delivered quickly and safely.
+                                            </p>
+                                        </div>
+                                        
+
+                                        <div class="poppins-semibold mt-5">
+                                        <h2>Reminder about test cards</h2>
+                                        <strong><span class="card-title pb-2 text-center">If you are testing the payment functionality on our website, please use the following test data:</span></strong>
+                                        <ul>
+                                            <li>Visa: 4111 1111 1111 1111</li>
+                                            <li>MasterCard: 5555 5555 5555 4444</li>
+                                            <li>American Express: 3714 496353 98431</li>
+                                        </ul>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                            }
-                        </div>
                             <hr />
                         </div>
                     </div>
@@ -138,17 +154,11 @@
                 <div class="card-footer">                    
                     <div class="row">
                         <div class="col-12 col-md-4 offset-md-4">
-                        @if (User.IsInRole(Anova_Utility.WC.AdminRole))
-                        {
-                            <button class="btn btn-warning btn-square form-control btn-lg" onclick="return validateInput()" id="submit-button">Submit order</button>
-                        }
-                        else
-                        {
-                        <button type="submit" onclick="return validateInput()" class="btn btn-dark btn-success form-control ">
-                                        <span>Submit Inquiry</span>
-                            </button>
-                            
-                        }
+
+                        
+                            <button class="btn btn-outline-warning btn-square form-control btn-lg" onclick="return validateInput()" id="submit-button">Submit order</button>
+                        
+
                     </div>
                     </div>
                 </div>
@@ -156,29 +166,52 @@
         </div>
     
 </form>
+</section>
+
+ <style>
+        .delivery-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9fbfc;
+            border-left: 4px solid red;
+            border-radius: 4px;
+        }
+
+            .delivery-info svg {
+                fill: red;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+    </style>
 
 
-@section Scripts{
+
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
-  <script src="https://js.braintreegateway.com/web/dropin/1.22.1/js/dropin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://js.braintreegateway.com/web/dropin/1.22.1/js/dropin.min.js"></script>
+
     <script>
+
+
         var client_token = "@ViewBag.ClientToken";
         var form = document.querySelector('#payment-form');
         braintree.dropin.create({
             authorization: client_token,
-              container: '#dropin-container'
-            }, function (createErr, instance) {
-                    form.addEventListener('submit', function () {
-                        event.preventDefault();
-                        //Add the nonce to the form and submit
-                                instance.requestPaymentMethod(function (err, payload) {
-                                    // Submit payload.nonce to your server
-                                    document.querySelector('#nonce').value = payload.nonce;
-                                    form.submit();
-                                });
-                            });
+            container: '#dropin-container'
+        }, function (createErr, instance) {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+                // Add the nonce to the form and submit
+                instance.requestPaymentMethod(function (err, payload) {
+                    // Submit payload.nonce to your server
+                    document.querySelector('#nonce').value = payload.nonce;
+                    form.submit();
+                });
+            });
         });
+
         function validateInput() {
             var app_name = document.getElementById("ApplicationUser_FullName").value;
             var app_phone = document.getElementById("ApplicationUser_PhoneNumber").value;
@@ -192,7 +225,7 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter Full Name!'
-                })
+                });
                 return false;
             }
             if (app_phone.toString() == '') {
@@ -200,7 +233,7 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter Phone Number!'
-                })
+                });
                 return false;
             }
             if (app_email.toString() == '') {
@@ -208,44 +241,57 @@
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter Email!'
-                })
+                });
                 return false;
             }
-                if (app_StreetAddress.toString() == '') {
+            if (app_StreetAddress.toString() == '') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter Street Address!'
-                })
+                });
                 return false;
-                }
-                if (app_City.toString() == '') {
+            }
+            if (app_City.toString() == '') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter City!'
-                })
-                
+                });
                 return false;
-                }
-                if (app_PostalCode.toString() == '') {
+            }
+            if (app_PostalCode.toString() == '') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter Postal Code!'
-                })
-                
+                });
                 return false;
-                }
-                if (app_State.toString() == '') {
+            }
+            if (app_State.toString() == '') {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter State!'
-                })
+                });
                 return false;
             }
             return true;
         }
+
+        function validateNoCyrillic(input) {
+            // Регулярное выражение для разрешения только латиницы и польских букв, без кириллицы
+            const regex = /[а-яА-ЯЁё]/;
+
+            // Если введен символ кириллицы, очистим поле
+            if (regex.test(input.value)) {
+                input.setCustomValidity('Cyrillic letters are not allowed.');
+                input.reportValidity();  // Покажет сообщение об ошибке
+                input.value = input.value.replace(/[а-яА-ЯЁё]/g, ''); // Убирает кириллицу
+            } else {
+                input.setCustomValidity(''); // Если кириллицы нет, сбрасываем ошибку
+            }
+        }
+
     </script>
 }

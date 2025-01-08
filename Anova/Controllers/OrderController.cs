@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Anova.Controllers
 {
-    [Authorize(Roles = WC.AdminRole)]
+    
     public class OrderController : Controller
     {
         private readonly IOrderHeaderRepository _orderHRepo;

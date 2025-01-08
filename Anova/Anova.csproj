@@ -31,4 +31,8 @@
     <ProjectReference Include="..\ShopOfSweets_Utility\Anova_Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
+
 </Project>
