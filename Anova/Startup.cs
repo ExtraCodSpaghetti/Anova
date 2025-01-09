@@ -17,6 +17,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.Extensions.Options;
 
 namespace Anova
 {
@@ -33,11 +35,17 @@ namespace Anova
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddDefaultTokenProviders().AddDefaultUI()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                // Отключаем требование подтверждения аккаунта
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddDefaultTokenProviders()
+            .AddDefaultUI()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -64,11 +72,22 @@ namespace Anova
 
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IDbInitializer, DbInitializer>();
+
             services.AddAuthentication().AddFacebook(Options =>
             {
                 Options.AppId = "2326152687555159";
                 Options.AppSecret = "0eb50ddff5abf24d41ad479c23d1543d";
+            });
 
+            services.AddAuthentication().AddGoogle(Options =>
+            {
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             });
 
             services.AddControllersWithViews();

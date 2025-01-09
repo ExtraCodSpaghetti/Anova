@@ -81,10 +81,12 @@ namespace Anova.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.PhoneNumber, FullName = Input.FullName };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
                 if (result.Succeeded)
                 {
                     if (User.IsInRole(WC.AdminRole))
@@ -98,6 +100,7 @@ namespace Anova.Areas.Identity.Pages.Account
 
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Генерация токена для подтверждения email
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
@@ -109,12 +112,10 @@ namespace Anova.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    // Если подтверждение email не требуется
+                    if (!_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
+                        // Если пользователь администратор, перенаправляем на главную страницу
                         if (User.IsInRole(WC.AdminRole))
                         {
                             TempData[WC.Success] = user.FullName + " has been registered";
@@ -122,20 +123,30 @@ namespace Anova.Areas.Identity.Pages.Account
                         }
                         else
                         {
+                            // Если пользователь не администратор, сразу входим в систему
                             await _signInManager.SignInAsync(user, isPersistent: false);
                             return LocalRedirect(returnUrl);
                         }
-
+                    }
+                    else
+                    {
+                        // Если подтверждение email всё же требуется (на случай, если позже захотите включить это снова)
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Если что-то пошло не так, возвращаемся на форму регистрации
             return Page();
         }
+
+            // If we got this far, something failed, redisplay form
+            
+        
     }
 }

@@ -5,9 +5,14 @@
     <h1 class=" mb-3 font-weight-normal pt-4" style="text-align:center; "><strong>Login</strong></h1>
     <form id="account" method="post">
 
+        <div class="py-2">
+            <input asp-for="Input.Email" placeholder="Email..." type="email" class="mb-1 form-control" />
+        </div>
+        <div class="py-2">
+            <input asp-for="Input.Password" placeholder="Password..." type="password" class="form-control" />
+        </div>
 
-        <input asp-for="Input.Email" placeholder="Email..." type="email" class="mb-1 form-control" />
-        <input asp-for="Input.Password" placeholder="Password..." type="password" class="form-control" />
+
         <button type="submit" class="button-class text-dark form-control" style="padding: 10px 32px;"><i class="fas fa-sign-in-alt "></i> Login</button>
 
         <a id="forgot-password" asp-page="./ForgotPassword" class="pb-2 text-secondary">Forgot your password?</a>
@@ -18,7 +23,13 @@
     </form>
     @if (Model.ExternalLogins?.Count > 0)
     {
-        <p class="text-center mb-1 font-weight-normal" style="text-align:center;">Or Continue with</p>
+
+        <div style="display: flex; align-items: center; text-align: center; margin: 20px 0;">
+            <div style="flex: 1; border-top: 1px solid #ccc;"></div>
+            <span style="margin: 0 10px;">Or Continue with</span>
+            <div style="flex: 1; border-top: 1px solid #ccc;"></div>
+        </div>
+        
     }
         @if ((Model.ExternalLogins?.Count ?? 0) == 0)
         {
@@ -32,21 +43,22 @@
         else
         {
         <form style="padding-top: 0px;" id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                <div>
+            <div class="row justify-content-md-center">
                         @foreach (var provider in Model.ExternalLogins)
                         {
                             @if (provider.Name.ToLower().Contains("facebook"))
                             {
-                                 <button style="padding-top: 0px;"  
-                                        type="submit" class="btn btn-outline-primary form-control"
+                                 <button   
+                                        type="submit" class="btn btn-outline-primary  col-5"
                                         name="provider" value="@provider.Name"
                                         title="Log in using your @provider.DisplayName account">
                                     <i class="fab fa-facebook-square"></i> @provider.DisplayName
                                 </button>
+                                <div class="col-1"></div>
                             }
                             else
                             {
-                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                        <button type="submit" class="btn btn-outline-danger  col-5" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa-brands fa-google"></i>&nbsp;@provider.DisplayName</button>
                             }
                         }
                 </div>
@@ -58,6 +70,21 @@
 
     </div>
 
+
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        toastr.options = {
+            "positionClass": "toast-top-right", // Центр сверху
+            "timeOut": 0, // Никогда не исчезает
+            "extendedTimeOut": 0, // Остается, пока пользователь не закроет его
+            "showDuration": "900",           // Анимация появления (мс)
+            "showEasing": "linear"           // Эффект появления (swing, linear)
+
+        };
+        toastr.error('Jeśli chcesz wypróbować logowanie lub rejestrację za pomocą Google lub Facebooka, użyj anonimowych kart przeglądarki.');
+    </script>
 }

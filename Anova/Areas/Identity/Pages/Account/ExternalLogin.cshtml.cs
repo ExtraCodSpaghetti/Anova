@@ -53,11 +53,12 @@ namespace Anova.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
             [Required]
             public string FullName { get; set; }
+
             [Required]
             public string PhoneNumber { get; set; }
-
         }
 
         public IActionResult OnGetAsync()
@@ -76,44 +77,67 @@ namespace Anova.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
-                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
-            }
-            var info = await _signInManager.GetExternalLoginInfoAsync();
-            if (info == null)
-            {
-                ErrorMessage = "Error loading external login information.";
+                ErrorMessage = $"Error external provider: {remoteError}";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
-            // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
-            if (result.Succeeded)
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
             {
-                _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                ErrorMessage = "Error loading external login.";
+                return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
+            }
+
+            // Проверяем, есть ли уже пользователь с таким внешним логином
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+            if (user != null)
+            {
+                // Если пользователь уже существует, то авторизуем его
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                _logger.LogInformation("User {Name} login in account using {LoginProvider}.", info.Principal.Identity.Name, info.LoginProvider);
                 return LocalRedirect(returnUrl);
             }
-            if (result.IsLockedOut)
+
+            // Если пользователь не найден, создаем нового пользователя
+            user = new ApplicationUser
             {
-                return RedirectToPage("./Lockout");
-            }
-            else
+                UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                FullName = info.Principal.FindFirstValue(ClaimTypes.Name),
+                PhoneNumber = info.Principal.FindFirstValue(ClaimTypes.MobilePhone) // Если есть номер телефона
+            };
+
+            // Создаем пользователя без подтверждения почты
+            var result = await _userManager.CreateAsync(user);
+            if (result.Succeeded)
             {
-                // If the user does not have an account, then ask the user to create an account.
-                ReturnUrl = returnUrl;
-                ProviderDisplayName = info.ProviderDisplayName;
-                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email))
+                // Добавляем внешний логин
+                result = await _userManager.AddLoginAsync(user, info);
+                if (result.Succeeded)
                 {
-                    Input = new InputModel
-                    {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
-                        FullName = info.Principal.FindFirstValue(ClaimTypes.Name)
-                    };
+                    _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+
+                    // Пользователь сразу авторизуется после создания
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    // Перенаправление на страницу, с которой пришел пользователь
+                    return LocalRedirect(returnUrl);
                 }
-                return Page();
             }
+
+            // В случае ошибок при создании пользователя
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            // Возвращаем пользователя на страницу регистрации, если возникли ошибки
+            ProviderDisplayName = info.ProviderDisplayName;
+            ReturnUrl = returnUrl;
+            return Page();
         }
 
         public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
@@ -134,7 +158,6 @@ namespace Anova.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-
                     await _userManager.AddToRoleAsync(user, WC.CustomerRole);
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)

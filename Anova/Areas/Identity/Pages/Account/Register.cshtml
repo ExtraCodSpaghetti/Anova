@@ -69,27 +69,32 @@
                     
                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                             <label>
-                                By clicking <em>Register</em> you agree to our <a style="color: #ce3232" asp-area="" asp-controller="Home" asp-action="Privacy">Personal Data Processing Policy</a>
+                                By clicking <em>Sing Up</em> you agree to our <a style="color: #ce3232" asp-area="" asp-controller="Home" asp-action="Privacy">Personal Data Processing Policy</a>
                             </label>
-                            <hr />
-                            <div class="pt-2 col-md-5 mx-auto text-center">
-                                <p>
+                            <div style="display: flex; align-items: center; text-align: center; margin: 20px 0;">
+                                <div style="flex: 1; border-top: 1px solid #ccc;"></div>
+                                <span style="margin: 0 10px;">Or Continue with</span>
+                                <div style="flex: 1; border-top: 1px solid #ccc;"></div>
+                            </div>
+                            <div class="pt-2 row justify-content-md-center">
+                                
                                     @foreach (var provider in Model.ExternalLogins)
                                     {
                                         @if (provider.Name.ToLower().Contains("facebook"))
                                         {
-                                            <button type="submit" class="btn btn-outline-primary form-control"
+                                            <button type="submit" class="btn btn-outline-primary  col-3"
                                                     name="provider" value="@provider.Name"
                                                     title="Log in using your @provider.DisplayName account">
                                                 <i class="fab fa-facebook-square"></i> @provider.DisplayName
                                             </button>
+                                            <div class="col-1"></div>
                                         }
                                         else
                                         {
-                                            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                            <button type="submit" class="btn btn-outline-danger  col-3" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fa-brands fa-google"></i>&nbsp;@provider.DisplayName</button>
                                         }
                                     }
-                                </p>
+                                
                             </div>
                         </form>
                         }
@@ -99,6 +104,20 @@
         </div>
     </div>
 
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        toastr.options = {
+            "positionClass": "toast-top-right", // Центр сверху
+            "timeOut": 0, // Никогда не исчезает
+            "extendedTimeOut": 0, // Остается, пока пользователь не закроет его
+            "showDuration": "900",           // Анимация появления (мс)
+            "showEasing": "linear"           // Эффект появления (swing, linear)
+
+        };
+        toastr.error('Jeśli chcesz wypróbować logowanie lub rejestrację za pomocą Google lub Facebooka, użyj anonimowych kart przeglądarki.');
+    </script>
 }
