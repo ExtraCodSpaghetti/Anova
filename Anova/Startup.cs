@@ -81,8 +81,6 @@ namespace Anova
 
             services.AddAuthentication().AddGoogle(Options =>
             {
-                Options.ClientId = "740647948403-qs40cf3v6fnifc5dupdsr06fujuisgeu.apps.googleusercontent.com";
-                Options.ClientSecret = "GOCSPX - x8qeqGiTc14ae3pfNOs0qUmqxTFp";
             });
 
             services.ConfigureApplicationCookie(options =>
