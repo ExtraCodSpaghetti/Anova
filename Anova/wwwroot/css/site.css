@@ -265,7 +265,7 @@ header {
     padding-top: 72px;
     padding-bottom: 72px;
     background-image: url(../images/Hero.jpg);
-    border-radius: 10px;
+    border-radius: 25px;
 }
 
 .hero-text {
@@ -286,7 +286,7 @@ header {
     margin-right: auto;
     min-width: 169px;
     height: 56px;
-    border-radius: 4px;
+    border-radius: 10px;
     border: none;
     padding: 16px 32px;
     font-weight: 500;

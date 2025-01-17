@@ -167,7 +167,6 @@ namespace Anova.Controllers
             //}
 
             //we need to create an inquiry
-            
 
             OrderHeader orderHeader = new OrderHeader()
             {
@@ -222,7 +221,6 @@ namespace Anova.Controllers
 
             await _emailSender.SendEmailAsync(WC.EmailAdmin, subject, messageBody);
 
-
             foreach (var prod in ProductUserVM.ProductList)
             {
                 OrderDetail orderDetail = new OrderDetail()
@@ -258,16 +256,15 @@ namespace Anova.Controllers
                 orderHeader.TransactionId = result.Target.Id;
                 orderHeader.OrderStatus = WC.StatusApproved;
 
-                // Добавляем данные для SweetAlert2
-                TempData["SwalIcon"] = "info"; // Иконка: success, error, info, warning
+                //  SweetAlert2
+                TempData["SwalIcon"] = "info"; // success, error, info, warning
                 TempData["SwalTitle"] = "Payment has been made successfully!";
-                TempData["SwalText"] = "<hr /> You will receive a message with information about your order. In case of questions about delivery or other questions, please call the phone numbers in the Contact Us tab. There you can also use a convenient form for contacting us by e-mail.";
+                TempData["SwalText"] = "<hr /> You will receive a message with information about your order.<br /> In case of questions about delivery or other questions, please call the phone numbers in the Contact Us tab. There you can also use a convenient form for contacting us by e-mail.";
             }
             else
             {
                 orderHeader.OrderStatus = WC.StatusCancelled;
 
-                // Добавляем данные для SweetAlert2 (ошибка)
                 TempData["SwalIcon"] = "error";
                 TempData["SwalTitle"] = "Error";
                 TempData["SwalText"] = "The payment was declined. Please try again.";

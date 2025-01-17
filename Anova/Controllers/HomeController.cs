@@ -38,7 +38,7 @@ namespace Anova.Controllers
             var allProducts = _prodRepo.GetAll(includeProperties: "Category,ApplicationType");
 
             // Выбираем случайные 4 продукта
-            var randomProducts = allProducts.OrderBy(p => Guid.NewGuid()).Take(4).ToList();
+            var randomProducts = allProducts.OrderBy(p => Guid.NewGuid()).Take(8).ToList();
 
             HomeVM HomeVm = new HomeVM()
             {

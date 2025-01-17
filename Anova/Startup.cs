@@ -81,13 +81,7 @@ namespace Anova
 
             services.AddAuthentication().AddGoogle(Options =>
             {
-            });
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             });
 
             services.AddControllersWithViews();

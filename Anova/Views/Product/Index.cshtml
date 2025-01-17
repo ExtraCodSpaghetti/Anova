@@ -7,28 +7,33 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                <a class="nav-link text-info text-white" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
             </li>
             <li>
-                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                <a class="nav-link text-info text-white" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
             </li>
             <li>
-                <a class="nav-link text-dark text-white" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
+                <a class="nav-link text-info text-white" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
             </li>
 
             <li>
-                <a class="nav-link text-dark text-white" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
+                <a class="nav-link text-info text-white" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
             </li>
             <li>
                 <a class="dropdown-item nav-link text-info" href="https://sandbox.braintreegateway.com/merchants/sqs9cf9v2p79bk6z/transactions/advanced_search" target="_blank">
                     Transactions
                 </a>
             </li>
+            <li>
+                <a class="dropdown-item nav-link text-info" href="https://app.mailjet.com/dashboard" target="_blank">
+                    Messages
+                </a>
+            </li>
+            <hr>
+            <li>
+                <a class="dropdown-item nav-link text-info text-white" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a>
+            </li>
         </ul>
-        <hr>
-        <li>
-            <a class="dropdown-item nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a>
-        </li>
     </aside>
 
     <!-- Main content -->
