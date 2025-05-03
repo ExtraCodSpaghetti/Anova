@@ -81,7 +81,8 @@ namespace Anova
 
             services.AddAuthentication().AddGoogle(Options =>
             {
-
+                Options.ClientId = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_ID");
+                Options.ClientSecret = Environment.GetEnvironmentVariable("GOOGLE_CLIENT_SECRET");
             });
 
             services.AddControllersWithViews();
